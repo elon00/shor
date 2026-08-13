@@ -1,0 +1,8 @@
+{
+  "name": "Nameless Web 4",
+  "description": "Web 4.0 Conway AI Automaton featuring Ethereum Web3 wallet integration, PQC ERC-721 NFT Marketplace, Indian Rupee (INR) UPI/Paytm Crypto Exchange, Metaverse WWE Fight Arena, and Gemini AI intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
