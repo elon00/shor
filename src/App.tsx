@@ -310,7 +310,7 @@ export default function App() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-bold text-white tracking-wide">
-                Nameless <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-purple-400">Web 4.0</span>
+                Shor <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-purple-400">Web 4.0</span>
               </h1>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-mono">
                 Testnet & Multichain PQC

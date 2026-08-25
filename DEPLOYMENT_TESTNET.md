@@ -1,6 +1,6 @@
-# 🧪 Nameless Web 4.0: Testnet Deployment & Faucet Guide
+# 🧪 Shor Web 4.0: Testnet Deployment & Faucet Guide
 
-Deploy Nameless Web 4.0 smart contracts and the fullstack Web 4.0 dApp to EVM Testnets.
+Deploy Shor Web 4.0 smart contracts and the fullstack Web 4.0 dApp to EVM Testnets.
 
 ## Supported Testnets
 1. **Ethereum Sepolia** (Chain ID: `11155111`) • [Sepolia Faucet](https://sepoliafaucet.com)

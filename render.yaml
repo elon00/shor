@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: nameless-web4-multichain
+    name: shor-multichain
     env: node
     plan: free
     buildCommand: npm install && npm run build

@@ -1,4 +1,4 @@
-# Multi-stage Build for Nameless Web 4.0 Multichain App
+# Multi-stage Build for Shor Web 4.0 Multichain App
 FROM node:20-alpine AS builder
 
 WORKDIR /app

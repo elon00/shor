@@ -42,7 +42,7 @@ export const MarketingStrategyHub: React.FC<MarketingStrategyHubProps> = ({
   const [isGenerating, setIsGenerating] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
-  const referralLink = `https://nameless-web4.io/join?ref=${wallet.address || '0x71C83F92'}`;
+  const referralLink = `https://shor.io/join?ref=${wallet.address || '0x71C83F92'}`;
   const [referralCopied, setReferralCopied] = useState(false);
   const [claimedRewards, setClaimedRewards] = useState(false);
 
@@ -61,14 +61,14 @@ Here is why this changes everything 👇
 3/7 💰 Unlimited Quantum Energy Tokenomics ($PQC) with infinite liquidity pools.
 4/7 🤼 World-first WWE Metaverse AI Wrestling Battle Arena powered by Gemini AI.
 
-Join the revolution: https://nameless-web4.io
+Join the revolution: https://shor.io
 #Web4 #PostQuantum #Crypto #AI #Ethereum #GeminiAI`,
 
-    LINKEDIN: `🌐 Announcing Nameless Web 4.0: The Symbiosis of Autonomous AI Agents and Post-Quantum Cryptography.
+    LINKEDIN: `🌐 Announcing Shor Web 4.0: The Symbiosis of Autonomous AI Agents and Post-Quantum Cryptography.
 
 As quantum computing advances rapidly toward breaking classical RSA and elliptic-curve cryptography, decentralized architectures must undergo a paradigm shift.
 
-Nameless Web 4.0 introduces:
+Shor Web 4.0 introduces:
 🔹 FIPS 203 ML-KEM-768 & FIPS 204 ML-DSA-65 Lattice-based security protocols
 🔹 Multi-Chain smart contracts spanning 9 top EVM ecosystems
 🔹 Self-optimizing cellular neural agents orchestrating real-time state consensus
@@ -76,7 +76,7 @@ Nameless Web 4.0 introduces:
 
 We are building the sovereign foundation for the next computational era.
 
-Read our Technical Whitepaper: https://nameless-web4.io/whitepaper
+Read our Technical Whitepaper: https://shor.io/whitepaper
 #QuantumComputing #Web4 #ArtificialIntelligence #BlockchainSecurity #DeepTech`,
 
     TELEGRAM: `🚨 [ALPHA ALERT] NAMELESS WEB 4.0 IS LIVE! 🚨
@@ -87,7 +87,7 @@ Read our Technical Whitepaper: https://nameless-web4.io/whitepaper
 🤼 WWE AI Metaverse Ring Battles + INR UPI Instant Exchange
 
 🚀 Claim your free Genesis Airdrop: +500 $PQC & ₹10,000 INR
-👉 https://nameless-web4.io
+👉 https://shor.io
 
 Lattice encryption verified by ML-KEM-768. Don't sleep on this! 📈`,
 
@@ -96,7 +96,7 @@ Lattice encryption verified by ML-KEM-768. Don't sleep on this! 📈`,
 "Stop scrolling! Quantum computers will break Bitcoin and Ethereum in a few years... UNLESS you know about Web 4.0."
 
 [Visual: Showcase glowing Conway AI cell grid on screen]
-"This is Nameless Web 4.0. It combines self-evolving AI cellular automata with Post-Quantum Lattice encryption that even a 4096-qubit quantum supercomputer cannot crack."
+"This is Shor Web 4.0. It combines self-evolving AI cellular automata with Post-Quantum Lattice encryption that even a 4096-qubit quantum supercomputer cannot crack."
 
 [Call To Action]
 "You can battle AI WWE champions, trade quantum NFTs, and claim free $PQC tokens right now. Link in bio!"`,
@@ -107,12 +107,12 @@ Hey r/CryptoCurrency & r/MachineLearning,
 
 Classical Web3 assumes ECC and ECDSA signatures will protect private keys forever. But Shor's algorithm running on a quantum processor compromises secp256k1 within milliseconds.
 
-Nameless Web 4.0 solves this by implementing:
+Shor Web 4.0 solves this by implementing:
 1. NIST FIPS 203 ML-KEM-768 lattice encryption on EVM Layer-2 networks.
 2. Conway Game of Life cellular automata infused with autonomous Gemini AI agents.
 3. Cross-chain state synchronization via zero-knowledge quantum bridges.
 
-Check the live deployment and testnet contracts: https://nameless-web4.io`,
+Check the live deployment and testnet contracts: https://shor.io`,
   });
 
   const handleGenerateCustomCampaign = () => {
@@ -527,14 +527,14 @@ Check the live deployment and testnet contracts: https://nameless-web4.io`,
           <div className="flex items-center justify-between border-b border-slate-800 pb-4">
             <div>
               <h3 className="text-base font-bold text-white">
-                Nameless Web 4.0 Institutional Pitch Deck & Architecture Brief
+                Shor Web 4.0 Institutional Pitch Deck & Architecture Brief
               </h3>
               <p className="text-xs text-slate-400 mt-1">
                 Executive summary for Tier-1 Venture Capitalists, Web3 Foundations, and Quantum Research Institutes.
               </p>
             </div>
             <button
-              onClick={() => onAddTerminalMessage('✓ [WHITEPAPER] Downloaded Nameless Web 4.0 Whitepaper PDF v4.2')}
+              onClick={() => onAddTerminalMessage('✓ [WHITEPAPER] Downloaded Shor Web 4.0 Whitepaper PDF v4.2')}
               className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold transition shadow-lg shadow-purple-900/30"
             >
               Download PDF Whitepaper

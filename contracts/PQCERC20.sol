@@ -4,7 +4,7 @@ pragma solidity ^0.8.20;
 /**
  * @title PQCERC20
  * @notice Post-Quantum Cryptography Enabled ERC-20 Token ($PQC)
- * Built for Nameless Web 4.0 Multichain Cellular Automaton & AI Network.
+ * Built for Shor Web 4.0 Multichain Cellular Automaton & AI Network.
  * Supports FIPS 203 ML-KEM-768 lattice state verification and cross-chain bridge minting.
  */
 contract PQCERC20 {

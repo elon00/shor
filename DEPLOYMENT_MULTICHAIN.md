@@ -1,7 +1,7 @@
-# 🌐 Nameless Web 4.0: Multichain Deployment & Architecture Guide
+# 🌐 Shor Web 4.0: Multichain Deployment & Architecture Guide
 
 ## Overview
-Nameless Web 4.0 is an enterprise-grade **Post-Quantum Cryptography & Conway AI Automaton** platform deployed across **9 EVM Blockchains**:
+Shor Web 4.0 is an enterprise-grade **Post-Quantum Cryptography & Conway AI Automaton** platform deployed across **9 EVM Blockchains**:
 - **Ethereum Mainnet & Sepolia Testnet**
 - **Polygon PoS & Polygon Amoy Testnet**
 - **Arbitrum One** (Layer-2 Rollup)

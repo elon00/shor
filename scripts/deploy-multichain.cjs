@@ -19,7 +19,7 @@ const CHAINS = [
 
 async function main() {
   console.log("==================================================");
-  console.log("🌐 Nameless Web 4.0 Multichain Deployment Manager");
+  console.log("🌐 Shor Web 4.0 Multichain Deployment Manager");
   console.log("==================================================");
 
   const deployments = {};

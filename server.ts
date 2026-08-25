@@ -107,7 +107,7 @@ app.post('/api/agent/command', async (req, res) => {
   try {
     const { userPrompt, currentTab, isRunning, population, wallet, config, model } = req.body;
     const ai = getGeminiClient();
-    const systemInstruction = `You are "Aether Agent Leader", the master Multi-Model Agentic AI for the Nameless Web 4.0 Multichain Platform.
+    const systemInstruction = `You are "Aether Agent Leader", the master Multi-Model Agentic AI for the Shor Web 4.0 Multichain Platform.
 Capabilities:
 - Grid Controls: START_SIMULATION, PAUSE_SIMULATION, CLEAR_GRID, RANDOMIZE_GRID, LOAD_PRESET
 - Tabs: NAVIGATE_TAB (GRID, MARKETING, NFT_MARKET, INR_EXCHANGE, WWE_METAVERSE, PQC, TERMINAL, ANALYTICS)
@@ -160,7 +160,7 @@ async function startServer() {
   }
 
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`⚡ Nameless Web 4.0 Server running on http://0.0.0.0:${PORT}`);
+    console.log(`⚡ Shor Web 4.0 Server running on http://0.0.0.0:${PORT}`);
   });
 }
 

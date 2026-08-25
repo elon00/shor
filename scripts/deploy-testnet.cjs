@@ -12,7 +12,7 @@ const TESTNETS = [
 
 async function main() {
   console.log("==================================================================");
-  console.log("🧪 Nameless Web 4.0: Automated Testnet Deployment Engine");
+  console.log("🧪 Shor Web 4.0: Automated Testnet Deployment Engine");
   console.log("==================================================================");
 
   const deployments = {};

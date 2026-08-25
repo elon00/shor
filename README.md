@@ -1,11 +1,11 @@
-# 🌐 Nameless Web 4.0: Quantum Multichain Automaton & AI Growth Protocol
+# 🌐 Shor Web 4.0: Quantum Multichain Automaton & AI Growth Protocol
 
 [![EVM Compatible](https://img.shields.io/badge/EVM-9%20Chains%20%2B%206%20Testnets-blue.svg)](https://ethereum.org/)
 [![Post-Quantum Cryptography](https://img.shields.io/badge/PQC-NIST%20FIPS%20203%20ML--KEM--768-purple.svg)](https://csrc.nist.gov/)
 [![AI Multi-Model](https://img.shields.io/badge/AI%20Models-Gemini%203.7%20%7C%20DeepSeek%20%7C%20Claude%20%7C%20GPT--4o-emerald.svg)](https://ai.google.dev/)
 [![Token Supply](https://img.shields.io/badge/Supply-Unlimited%20Quantum%20Energy%20(%E2%88%9E)-gold.svg)](https://etherscan.io/)
 
-**Nameless Web 4.0** is an enterprise-grade decentralized platform combining **Conway AI Cellular Automata**, **NIST Post-Quantum Cryptography (ML-KEM-768)**, **Multi-Model Autonomous AI Swarm Intelligence**, **Unlimited Token Supply ($PQC)**, and a **Global Standard Marketing & Viral Growth Engine** deployed across **6 EVM Testnets and 9 Multichain Networks**.
+**Shor Web 4.0** is an enterprise-grade decentralized platform combining **Conway AI Cellular Automata**, **NIST Post-Quantum Cryptography (ML-KEM-768)**, **Multi-Model Autonomous AI Swarm Intelligence**, **Unlimited Token Supply ($PQC)**, and a **Global Standard Marketing & Viral Growth Engine** deployed across **6 EVM Testnets and 9 Multichain Networks**.
 
 ---
 
@@ -70,8 +70,8 @@ Interactive AI leader with dynamic real-time model switching:
 ### 2. Installation
 ```bash
 # Clone the repository
-git clone https://github.com/elon00/nameless-web-4.git
-cd nameless-web-4
+git clone https://github.com/elon00/shor.git
+cd shor
 
 # Install dependencies
 npm install
