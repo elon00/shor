@@ -189,3 +189,23 @@ export interface WweMatchState {
   }[];
   ringVenue: 'Quantum Mania Ring' | 'Lattice Royal Rumble' | 'Metaverse Smackdown Arena';
 }
+
+// Shor Global Synchronization & Multichain State Integration
+export interface ShorSyncState {
+  isAutoSyncEnabled: boolean;
+  status: 'SYNCED' | 'SYNCHRONIZING' | 'OFFLINE';
+  lastSyncTime: string;
+  blockHeight: number;
+  activePeers: number;
+  syncedChainsCount: number;
+  latticeEntropy: number;
+  pqcVerificationRate: number;
+  pendingSyncTasks: number;
+  syncHistory: {
+    id: string;
+    type: 'CROSS_CHAIN' | 'LATTICE_PROOF' | 'AUTOMATON_STATE' | 'ORDERBOOK' | 'AGENT_SWARM';
+    message: string;
+    timestamp: string;
+    status: 'CONFIRMED' | 'RELAYED';
+  }[];
+}

@@ -1,0 +1,44 @@
+name: Build & Testnet Deploy Workflow
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-test:
+    name: Build & Verify Quantum Multichain
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Type Check & Lint
+        run: npm run lint
+
+      - name: Build Fullstack Web 4.0 Distribution
+        run: npm run build
+
+      - name: Test Automated Testnet Deployments
+        run: node scripts/deploy-testnet.cjs
+
+      - name: Test Multichain Network Registry
+        run: node scripts/deploy-multichain.cjs
+
+      - name: Upload Deployment Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: testnet-deployments
+          path: |
+            testnet-deployments.json
+            deployments.json

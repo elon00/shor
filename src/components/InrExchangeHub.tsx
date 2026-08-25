@@ -112,6 +112,7 @@ export const InrExchangeHub: React.FC<InrExchangeHubProps> = ({
         const newTx: InrTransaction = {
           id: `tx-${Date.now()}`,
           type: 'BUY_CRYPTO',
+          chainId: wallet.chainId || 11155111,
           paymentMethod,
           cryptoAmount: cryptoVal,
           cryptoSymbol: selectedCrypto,
@@ -152,6 +153,7 @@ export const InrExchangeHub: React.FC<InrExchangeHubProps> = ({
         const newTx: InrTransaction = {
           id: `tx-${Date.now()}`,
           type: 'SELL_CRYPTO',
+          chainId: wallet.chainId || 11155111,
           paymentMethod,
           cryptoAmount: cryptoVal,
           cryptoSymbol: selectedCrypto,

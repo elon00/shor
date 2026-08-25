@@ -177,6 +177,7 @@ export const NftMarketplace: React.FC<NftMarketplaceProps> = ({
       const newNft: PqcNftItem = {
         id: `nft-${Date.now()}`,
         tokenId: newTokenId,
+        chainId: wallet.chainId || 11155111,
         name: mintName,
         description: selectedCell
           ? `Minted from Automaton Cell (${selectedCell.x}, ${selectedCell.y}) at Generation ${selectedCell.generation}. Persona: ${selectedCell.aiAgent?.persona || 'Lattice Cell'}.`

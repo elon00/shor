@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { CellData, GridConfig, PqcProof, AgentLog, Web3WalletState } from './types';
+import { CellData, GridConfig, PqcProof, AgentLog, Web3WalletState, ShorSyncState } from './types';
 import { calculateStateHash, generatePqcKeypair, createPqcProof, AGENT_PERSONAS } from './lib/pqc';
 import { SUPPORTED_CHAINS, getChainConfig } from './lib/multichain';
+import { createInitialSyncState, performShorSynchronization } from './lib/syncEngine';
 import { audioSynth } from './lib/audioSynth';
 import { GridAutomaton } from './components/GridAutomaton';
 import { ControlBar } from './components/ControlBar';
@@ -16,6 +17,7 @@ import { InrExchangeHub } from './components/InrExchangeHub';
 import { WweMetaverseArena } from './components/WweMetaverseArena';
 import { AgenticChatbot } from './components/AgenticChatbot';
 import { MarketingStrategyHub } from './components/MarketingStrategyHub';
+import { ShorSyncDashboard } from './components/ShorSyncDashboard';
 import {
   Cpu,
   ShieldCheck,
@@ -31,6 +33,7 @@ import {
   ArrowLeftRight,
   TrendingUp,
   Megaphone,
+  RefreshCw,
 } from 'lucide-react';
 
 const GRID_WIDTH = 36;
@@ -52,9 +55,14 @@ export default function App() {
   const [generation, setGeneration] = useState(0);
   const [selectedCell, setSelectedCell] = useState<CellData | null>(null);
   const [hoveredCell, setHoveredCell] = useState<CellData | null>(null);
-  const [activeTab, setActiveTab] = useState<'GRID' | 'NFT_MARKET' | 'INR_EXCHANGE' | 'WWE_METAVERSE' | 'MARKETING' | 'PQC' | 'TERMINAL' | 'ANALYTICS'>('GRID');
+  const [activeTab, setActiveTab] = useState<'GRID' | 'SYNC' | 'MARKETING' | 'NFT_MARKET' | 'INR_EXCHANGE' | 'WWE_METAVERSE' | 'PQC' | 'TERMINAL' | 'ANALYTICS'>('GRID');
   const [isBridgeOpen, setIsBridgeOpen] = useState(false);
 
+  // Global State Synchronizer
+  const [syncState, setSyncState] = useState<ShorSyncState>(() => createInitialSyncState());
+  const [isSynchronizing, setIsSynchronizing] = useState(false);
+
+  // Web3 Ethereum & Multichain State with Unlimited Token Faucet
   const defaultChain = SUPPORTED_CHAINS[0];
   const [wallet, setWallet] = useState<Web3WalletState>({
     isConnected: true,
@@ -76,7 +84,7 @@ export default function App() {
     {
       id: 'init-1',
       sender: 'SYSTEM',
-      text: '🌐 Web 4.0 Quantum Multichain Automaton & Marketing Engine Initialized.\nML-KEM-768 lattice encryption active across 9 EVM chains. Unlimited $PQC liquidity active.',
+      text: '🌐 Shor Web 4.0 Quantum Multichain Automaton & Protocol Synchronizer Initialized.\nML-KEM-768 lattice encryption active across 9 EVM chains. Unlimited $PQC liquidity ledger active.',
       timestamp: new Date().toLocaleTimeString(),
     },
   ]);
@@ -97,6 +105,32 @@ export default function App() {
       ...prev.slice(0, 50),
     ]);
   }, []);
+
+  // Trigger Manual Protocol Sync
+  const handleTriggerSync = useCallback(() => {
+    setIsSynchronizing(true);
+    audioSynth.playKeyExchange();
+    setTimeout(() => {
+      const result = performShorSynchronization(syncState, { grid, wallet, pqcProofs });
+      setSyncState(result.newSyncState);
+      setPqcProofs((prev) => [result.generatedProof, ...prev.slice(0, 30)]);
+      setIsSynchronizing(false);
+      audioSynth.playQuantumVerification();
+      addTerminalMessage(`🔄 [SHOR SYNC] State synchronized across 9 EVM chains at Block #${result.newSyncState.blockHeight}.`);
+    }, 800);
+  }, [syncState, grid, wallet, pqcProofs, addTerminalMessage]);
+
+  // Background Auto-Sync Timer (every 6 seconds if enabled)
+  useEffect(() => {
+    let timer: any;
+    if (syncState.isAutoSyncEnabled) {
+      timer = setInterval(() => {
+        const result = performShorSynchronization(syncState, { grid, wallet, pqcProofs });
+        setSyncState(result.newSyncState);
+      }, 6000);
+    }
+    return () => clearInterval(timer);
+  }, [syncState.isAutoSyncEnabled, grid, wallet, pqcProofs]);
 
   function createEmptyGrid(w: number, h: number): CellData[][] {
     const rows: CellData[][] = [];
@@ -172,7 +206,7 @@ export default function App() {
                 aiAgent = {
                   id: `agent-${c}-${r}`,
                   persona: persona.persona,
-                  status: 'Web 4.0 Autonomous Node',
+                  status: 'Shor Autonomous Node',
                   directive: persona.directive,
                   memory: [`Evolved at Gen ${generation + 1}`],
                   autonomyLevel: 6,
@@ -253,7 +287,7 @@ export default function App() {
         newGrid[r][c].aiAgent = {
           id: `agent-${c}-${r}`,
           persona: AGENT_PERSONAS[i % AGENT_PERSONAS.length].persona,
-          status: 'Active Web 4.0 Neural Agent',
+          status: 'Active Shor Neural Agent',
           directive: 'Orchestrate post-quantum lattice consensus',
           memory: ['Preset Genesis Node'],
           autonomyLevel: 8,
@@ -317,7 +351,7 @@ export default function App() {
               </span>
             </div>
             <p className="text-xs text-slate-400">
-              Conway AI Automaton • Multi-Model AI • Testnet 6 Chains • Infinite Supply Tokenomics
+              Conway AI Automaton • Multi-Model AI • Testnet 6 Chains • Protocol Sync
             </p>
           </div>
         </div>
@@ -333,6 +367,18 @@ export default function App() {
           >
             <Layers className="w-3.5 h-3.5" />
             Grid Automaton
+          </button>
+
+          <button
+            onClick={() => setActiveTab('SYNC')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+              activeTab === 'SYNC'
+                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+            }`}
+          >
+            <RefreshCw className="w-3.5 h-3.5 text-emerald-400" />
+            Protocol Sync
           </button>
 
           <button
@@ -458,6 +504,19 @@ export default function App() {
               </div>
             </div>
           </div>
+        )}
+
+        {activeTab === 'SYNC' && (
+          <ShorSyncDashboard
+            syncState={syncState}
+            setSyncState={setSyncState}
+            wallet={wallet}
+            grid={grid}
+            pqcProofs={pqcProofs}
+            onTriggerSync={handleTriggerSync}
+            isSynchronizing={isSynchronizing}
+            onAddTerminalMessage={addTerminalMessage}
+          />
         )}
 
         {activeTab === 'MARKETING' && (
