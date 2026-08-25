@@ -108,7 +108,7 @@ export const AutoMetaMaskBatchModal: React.FC<AutoMetaMaskBatchModalProps> = ({
 
         if (onAddTerminalMessage) {
           onAddTerminalMessage(
-            `⚡ [AUTO MULTICHAIN SYNC] Registered & Synced all 9 EVM chains with wallet in high-speed mode.`
+            `⚡ [AUTO MULTICHAIN SYNC] Registered & Synced all 12 EVM chains with wallet in high-speed mode.`
           );
         }
       }
@@ -152,7 +152,7 @@ export const AutoMetaMaskBatchModal: React.FC<AutoMetaMaskBatchModalProps> = ({
             </div>
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                1-Click Auto-Connect <span className="text-amber-400">All 9 EVM Multichains</span>
+                1-Click Auto-Connect <span className="text-amber-400">All 12 EVM Multichains</span>
               </h2>
               <p className="text-xs text-slate-400">
                 Instantly batch-register & synchronize all Testnets and Mainnets directly to your MetaMask Web3 Wallet.

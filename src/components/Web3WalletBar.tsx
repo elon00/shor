@@ -154,10 +154,10 @@ export const Web3WalletBar: React.FC<Web3WalletBarProps> = ({
         <button
           onClick={() => setIsBatchAutoModalOpen(true)}
           className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black font-sans font-bold px-2.5 py-1 rounded-md text-[11px] transition shadow-md shadow-orange-500/20"
-          title="Auto-connect and add all 9 multichains to MetaMask in 1-Click"
+          title="Auto-connect and add all 12 multichains to MetaMask in 1-Click"
         >
           <Zap className="w-3.5 h-3.5 fill-black text-black animate-bounce" />
-          <span>⚡ Auto-Connect All 9 Chains</span>
+          <span>⚡ Auto-Connect All 12 Chains</span>
         </button>
 
         {/* Network Selector Dropdown */}

@@ -4,13 +4,13 @@
 
 ![Shor Web 4.0 Banner](https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80)
 
-[![EVM Compatible](https://img.shields.io/badge/EVM-9%20Chains%20%2B%206%20Testnets-3B82F6.svg?style=for-the-badge&logo=ethereum&logoColor=white)](https://ethereum.org/)
+[![EVM Compatible](https://img.shields.io/badge/EVM-12%20Chains%20%2B%209%20Testnets-3B82F6.svg?style=for-the-badge&logo=ethereum&logoColor=white)](https://ethereum.org/)
 [![Post-Quantum Cryptography](https://img.shields.io/badge/PQC-NIST%20FIPS%20203%20ML--KEM--768-8B5CF6.svg?style=for-the-badge&logo=shield&logoColor=white)](https://csrc.nist.gov/)
 [![AI Multi-Model](https://img.shields.io/badge/AI%20Models-Gemini%203.7%20%7C%20DeepSeek%20%7C%20Claude%20%7C%20GPT--4o-10B981.svg?style=for-the-badge&logo=openai&logoColor=white)](https://ai.google.dev/)
 [![Token Supply](https://img.shields.io/badge/Supply-Unlimited%20Quantum%20Energy%20(%E2%88%9E)-F59E0B.svg?style=for-the-badge&logo=coins&logoColor=black)](https://etherscan.io/)
 [![CI/CD Status](https://img.shields.io/badge/CI%2FCD-Passing%20(Automated%20Deploy)-059669.svg?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/elon00/shor/actions)
 
-**Shor** is an enterprise-grade Web 4.0 decentralized ecosystem combining **Conway AI Cellular Automata**, **NIST Post-Quantum Cryptography (FIPS 203 ML-KEM-768 / FIPS 204 ML-DSA-65)**, **Autonomous Multi-Model AI Swarm Intelligence**, **Unlimited Supply Tokenomics ($PQC)**, and an **Autonomous Protocol State Synchronizer** deployed across **6 EVM Testnets and 9 Multichain Networks**.
+**Shor** is an enterprise-grade Web 4.0 decentralized ecosystem combining **Conway AI Cellular Automata**, **NIST Post-Quantum Cryptography (FIPS 203 ML-KEM-768 / FIPS 204 ML-DSA-65)**, **Autonomous Multi-Model AI Swarm Intelligence**, **Unlimited Supply Tokenomics ($PQC)**, and an **Autonomous Protocol State Synchronizer** deployed across **9 EVM Testnets and 12 Multichain Networks (including Monad, Somnia, and Gensyn AI)**.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/elon00/shor)
 

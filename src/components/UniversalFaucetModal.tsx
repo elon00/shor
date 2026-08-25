@@ -88,7 +88,7 @@ export const UniversalFaucetModal: React.FC<UniversalFaucetModalProps> = ({
 
       if (onAddTerminalMessage) {
         onAddTerminalMessage(
-          `⚡ [UNIVERSAL FAUCET BATCH] Minted +250,000 $PQC & +5.0 Testnet Gas across all 6 EVM Testnets!`
+          `⚡ [UNIVERSAL FAUCET BATCH] Minted +250,000 $PQC & +5.0 Testnet Gas across all 9 EVM Testnets!`
         );
       }
     }, 900);
@@ -143,7 +143,7 @@ export const UniversalFaucetModal: React.FC<UniversalFaucetModalProps> = ({
                 </span>
               </div>
               <div className="text-xs text-slate-300">
-                1-Click instant minting across all 6 testnets with ₹0 transaction fee.
+                1-Click instant minting across all 9 testnets with ₹0 transaction fee.
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@ export const UniversalFaucetModal: React.FC<UniversalFaucetModalProps> = ({
             ) : (
               <>
                 <Zap className="w-4 h-4 fill-black text-black" />
-                Claim All 6 Testnet Faucets
+                Claim All 9 Testnet Faucets
               </>
             )}
           </button>

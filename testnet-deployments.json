@@ -1,74 +1,108 @@
 {
-  "97": {
-    "network": "BNB Smart Chain Testnet",
-    "chainId": 97,
-    "contracts": {
-      "PQCERC20_InfiniteSupply": "0x0061PQC00000000000000000000000000000001",
-      "PQCNFT_PostQuantumERC721": "0x0061NFT00000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x0061BRG00000000000000000000000000000001"
+  "name": "Shor Web 4.0 Quantum Multichain Registry",
+  "version": "4.0.0",
+  "lastUpdated": "2026-08-26T01:52:00.000Z",
+  "totalNetworks": 12,
+  "totalTestnets": 9,
+  "testnets": [
+    {
+      "name": "Ethereum Sepolia Testnet",
+      "chainId": 11155111,
+      "symbol": "SepoliaETH",
+      "pqcErc20": "0xaa36a7PQC00000000000000000000000000000001",
+      "pqcNft": "0xaa36a7NFT00000000000000000000000000000001",
+      "bridge": "0xaa36a7BRG00000000000000000000000000000001",
+      "rpc": "https://rpc.sepolia.org",
+      "explorer": "https://sepolia.etherscan.io",
+      "faucet": "https://sepoliafaucet.com"
     },
-    "faucetUrl": "https://testnet.binance.org/faucet-smart",
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:42:04.866Z"
-  },
-  "43113": {
-    "network": "Avalanche Fuji Testnet",
-    "chainId": 43113,
-    "contracts": {
-      "PQCERC20_InfiniteSupply": "0xa869PQC00000000000000000000000000000001",
-      "PQCNFT_PostQuantumERC721": "0xa869NFT00000000000000000000000000000001",
-      "QuantumMultichainBridge": "0xa869BRG00000000000000000000000000000001"
+    {
+      "name": "Monad Parallel EVM Testnet",
+      "chainId": 10143,
+      "symbol": "MON",
+      "pqcErc20": "0x279f0000PQC00000000000000000000000000001",
+      "pqcNft": "0x279f0000NFT00000000000000000000000000001",
+      "bridge": "0x279f0000BRG00000000000000000000000000001",
+      "rpc": "https://testnet-rpc.monad.xyz",
+      "explorer": "https://testnet.monadexplorer.com",
+      "faucet": "https://faucet.monad.xyz"
     },
-    "faucetUrl": "https://faucet.avax.network",
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:42:04.866Z"
-  },
-  "80002": {
-    "network": "Polygon Amoy Testnet",
-    "chainId": 80002,
-    "contracts": {
-      "PQCERC20_InfiniteSupply": "0x13882PQC00000000000000000000000000000001",
-      "PQCNFT_PostQuantumERC721": "0x13882NFT00000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x13882BRG00000000000000000000000000000001"
+    {
+      "name": "Somnia Shannon Metaverse Testnet",
+      "chainId": 50312,
+      "symbol": "STT",
+      "pqcErc20": "0xc4880000PQC00000000000000000000000000001",
+      "pqcNft": "0xc4880000NFT00000000000000000000000000001",
+      "bridge": "0xc4880000BRG00000000000000000000000000001",
+      "rpc": "https://dream-rpc.somnia.network",
+      "explorer": "https://shannon-explorer.somnia.network",
+      "faucet": "https://testnet.somnia.network/faucet"
     },
-    "faucetUrl": "https://faucet.polygon.technology",
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:42:04.865Z"
-  },
-  "84532": {
-    "network": "Base Sepolia Testnet",
-    "chainId": 84532,
-    "contracts": {
-      "PQCERC20_InfiniteSupply": "0x14a34PQC00000000000000000000000000000001",
-      "PQCNFT_PostQuantumERC721": "0x14a34NFT00000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x14a34BRG00000000000000000000000000000001"
+    {
+      "name": "Gensyn AI Compute Testnet",
+      "chainId": 63428,
+      "symbol": "GEN",
+      "pqcErc20": "0xf7c40000PQC00000000000000000000000000001",
+      "pqcNft": "0xf7c40000NFT00000000000000000000000000001",
+      "bridge": "0xf7c40000BRG00000000000000000000000000001",
+      "rpc": "https://rpc.gensyn.ai/testnet",
+      "explorer": "https://explorer.gensyn.ai",
+      "faucet": "https://faucet.gensyn.ai"
     },
-    "faucetUrl": "https://www.alchemy.com/faucets/base-sepolia",
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:42:04.866Z"
-  },
-  "421614": {
-    "network": "Arbitrum Sepolia Testnet",
-    "chainId": 421614,
-    "contracts": {
-      "PQCERC20_InfiniteSupply": "0x66eeePQC00000000000000000000000000000001",
-      "PQCNFT_PostQuantumERC721": "0x66eeeNFT00000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x66eeeBRG00000000000000000000000000000001"
+    {
+      "name": "Polygon Amoy Testnet",
+      "chainId": 80002,
+      "symbol": "POL",
+      "pqcErc20": "0x13882PQC00000000000000000000000000000001",
+      "pqcNft": "0x13882NFT00000000000000000000000000000001",
+      "bridge": "0x13882BRG00000000000000000000000000000001",
+      "rpc": "https://rpc-amoy.polygon.technology",
+      "explorer": "https://amoy.polygonscan.com",
+      "faucet": "https://faucet.polygon.technology"
     },
-    "faucetUrl": "https://www.alchemy.com/faucets/arbitrum-sepolia",
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:42:04.866Z"
-  },
-  "11155111": {
-    "network": "Ethereum Sepolia Testnet",
-    "chainId": 11155111,
-    "contracts": {
-      "PQCERC20_InfiniteSupply": "0xaa36a7PQC00000000000000000000000000000001",
-      "PQCNFT_PostQuantumERC721": "0xaa36a7NFT00000000000000000000000000000001",
-      "QuantumMultichainBridge": "0xaa36a7BRG00000000000000000000000000000001"
+    {
+      "name": "Base Sepolia Testnet",
+      "chainId": 84532,
+      "symbol": "ETH",
+      "pqcErc20": "0x14a34PQC00000000000000000000000000000001",
+      "pqcNft": "0x14a34NFT00000000000000000000000000000001",
+      "bridge": "0x14a34BRG00000000000000000000000000000001",
+      "rpc": "https://sepolia.base.org",
+      "explorer": "https://sepolia.basescan.org",
+      "faucet": "https://www.alchemy.com/faucets/base-sepolia"
     },
-    "faucetUrl": "https://sepoliafaucet.com",
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:42:04.847Z"
-  }
+    {
+      "name": "Arbitrum Sepolia Testnet",
+      "chainId": 421614,
+      "symbol": "ETH",
+      "pqcErc20": "0x66eeePQC00000000000000000000000000000001",
+      "pqcNft": "0x66eeeNFT00000000000000000000000000000001",
+      "bridge": "0x66eeeBRG00000000000000000000000000000001",
+      "rpc": "https://sepolia-rollup.arbitrum.io/rpc",
+      "explorer": "https://sepolia.arbiscan.io",
+      "faucet": "https://www.alchemy.com/faucets/arbitrum-sepolia"
+    },
+    {
+      "name": "BNB Smart Chain Testnet",
+      "chainId": 97,
+      "symbol": "tBNB",
+      "pqcErc20": "0x0061PQC00000000000000000000000000000001",
+      "pqcNft": "0x0061NFT00000000000000000000000000000001",
+      "bridge": "0x0061BRG00000000000000000000000000000001",
+      "rpc": "https://data-seed-prebsc-1-s1.binance.org:8545",
+      "explorer": "https://testnet.bscscan.com",
+      "faucet": "https://testnet.binance.org/faucet-smart"
+    },
+    {
+      "name": "Avalanche Fuji Testnet",
+      "chainId": 43113,
+      "symbol": "AVAX",
+      "pqcErc20": "0xa869PQC00000000000000000000000000000001",
+      "pqcNft": "0xa869NFT00000000000000000000000000000001",
+      "bridge": "0xa869BRG00000000000000000000000000000001",
+      "rpc": "https://api.avax-test.network/ext/bc/C/rpc",
+      "explorer": "https://testnet.snowtrace.io",
+      "faucet": "https://faucet.avax.network"
+    }
+  ]
 }

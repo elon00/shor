@@ -19,6 +19,7 @@ export interface EvmChainConfig {
 }
 
 export const SUPPORTED_CHAINS: EvmChainConfig[] = [
+  // 1. Ethereum Sepolia Testnet
   {
     id: 11155111,
     hexChainId: '0xaa36a7',
@@ -38,6 +39,67 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     gasAvgGwei: 2,
     faucetUrl: 'https://sepoliafaucet.com',
   },
+  // 2. Monad Parallelized EVM Testnet
+  {
+    id: 10143,
+    hexChainId: '0x279f',
+    name: 'Monad Parallel EVM Testnet',
+    shortName: 'Monad',
+    category: 'Testnet',
+    symbol: 'MON',
+    decimals: 18,
+    rpcUrls: ['https://testnet-rpc.monad.xyz'],
+    blockExplorerUrls: ['https://testnet.monadexplorer.com'],
+    icon: '🔮',
+    color: 'from-purple-600 to-indigo-800',
+    badgeBg: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
+    pqcErc20Contract: '0x279f0000PQC00000000000000000000000000001',
+    pqcNftErc721Contract: '0x279f0000NFT00000000000000000000000000001',
+    bridgeContract: '0x279f0000BRG00000000000000000000000000001',
+    gasAvgGwei: 0.05,
+    faucetUrl: 'https://faucet.monad.xyz',
+  },
+  // 3. Somnia Shannon High-TPS Metaverse Testnet
+  {
+    id: 50312,
+    hexChainId: '0xc488',
+    name: 'Somnia Shannon Metaverse Testnet',
+    shortName: 'Somnia',
+    category: 'Testnet',
+    symbol: 'STT',
+    decimals: 18,
+    rpcUrls: ['https://dream-rpc.somnia.network'],
+    blockExplorerUrls: ['https://shannon-explorer.somnia.network'],
+    icon: '🌌',
+    color: 'from-fuchsia-500 to-pink-700',
+    badgeBg: 'bg-fuchsia-500/10 text-fuchsia-300 border-fuchsia-500/30',
+    pqcErc20Contract: '0xc4880000PQC00000000000000000000000000001',
+    pqcNftErc721Contract: '0xc4880000NFT00000000000000000000000000001',
+    bridgeContract: '0xc4880000BRG00000000000000000000000000001',
+    gasAvgGwei: 0.01,
+    faucetUrl: 'https://testnet.somnia.network/faucet',
+  },
+  // 4. Gensyn AI Compute Testnet
+  {
+    id: 63428,
+    hexChainId: '0xf7c4',
+    name: 'Gensyn AI Compute Testnet',
+    shortName: 'Gensyn AI',
+    category: 'Testnet',
+    symbol: 'GEN',
+    decimals: 18,
+    rpcUrls: ['https://rpc.gensyn.ai/testnet'],
+    blockExplorerUrls: ['https://explorer.gensyn.ai'],
+    icon: '🧠',
+    color: 'from-emerald-500 to-cyan-700',
+    badgeBg: 'bg-emerald-500/10 text-cyan-300 border-cyan-500/30',
+    pqcErc20Contract: '0xf7c40000PQC00000000000000000000000000001',
+    pqcNftErc721Contract: '0xf7c40000NFT00000000000000000000000000001',
+    bridgeContract: '0xf7c40000BRG00000000000000000000000000001',
+    gasAvgGwei: 0.1,
+    faucetUrl: 'https://faucet.gensyn.ai',
+  },
+  // 5. Polygon Amoy Testnet
   {
     id: 80002,
     hexChainId: '0x13882',
@@ -57,6 +119,7 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     gasAvgGwei: 25,
     faucetUrl: 'https://faucet.polygon.technology',
   },
+  // 6. Base Sepolia Testnet
   {
     id: 84532,
     hexChainId: '0x14a34',
@@ -76,6 +139,7 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     gasAvgGwei: 0.05,
     faucetUrl: 'https://www.alchemy.com/faucets/base-sepolia',
   },
+  // 7. Arbitrum Sepolia Testnet
   {
     id: 421614,
     hexChainId: '0x66eee',
@@ -95,6 +159,7 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     gasAvgGwei: 0.1,
     faucetUrl: 'https://www.alchemy.com/faucets/arbitrum-sepolia',
   },
+  // 8. BNB Smart Chain Testnet
   {
     id: 97,
     hexChainId: '0x61',
@@ -114,6 +179,7 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     gasAvgGwei: 3,
     faucetUrl: 'https://testnet.binance.org/faucet-smart',
   },
+  // 9. Avalanche Fuji Testnet
   {
     id: 43113,
     hexChainId: '0xa869',
@@ -133,6 +199,7 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     gasAvgGwei: 25,
     faucetUrl: 'https://faucet.avax.network',
   },
+  // 10. Ethereum Mainnet
   {
     id: 1,
     hexChainId: '0x1',
@@ -151,6 +218,7 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     bridgeContract: '0x0001BRG0000000000000000000000000000001',
     gasAvgGwei: 15,
   },
+  // 11. Polygon PoS Mainnet
   {
     id: 137,
     hexChainId: '0x89',
@@ -169,6 +237,7 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     bridgeContract: '0x0089BRG0000000000000000000000000000001',
     gasAvgGwei: 35,
   },
+  // 12. Arbitrum One Mainnet
   {
     id: 42161,
     hexChainId: '0xa4b1',
@@ -302,7 +371,7 @@ export async function batchAutoConnectAllChainsToMetaMask(
     }
 
     if (onProgress) onProgress([...statuses], i + 1, SUPPORTED_CHAINS.length);
-    await new Promise((resolve) => setTimeout(resolve, 250));
+    await new Promise((resolve) => setTimeout(resolve, 200));
   }
 
   return {
