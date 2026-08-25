@@ -20,147 +20,21 @@ export interface EvmChainConfig {
 
 export const SUPPORTED_CHAINS: EvmChainConfig[] = [
   {
-    id: 1,
-    hexChainId: '0x1',
-    name: 'Ethereum Mainnet',
-    shortName: 'Ethereum',
-    category: 'Mainnet',
-    symbol: 'ETH',
-    decimals: 18,
-    rpcUrls: ['https://eth.llamarpc.com', 'https://rpc.ankr.com/eth'],
-    blockExplorerUrls: ['https://etherscan.io'],
-    icon: '⟠',
-    color: 'from-blue-500 to-indigo-600',
-    badgeBg: 'bg-blue-500/10 text-blue-300 border-blue-500/30',
-    pqcErc20Contract: '0x3F88a5291cD9173aB3D0101bA48a97f26792671A',
-    pqcNftErc721Contract: '0x88C02B9119A54a88E45447a2F272719B53Fa6811',
-    bridgeContract: '0x7128Da601272bE129A88712C9a224976a16A192B',
-    gasAvgGwei: 15,
-  },
-  {
-    id: 137,
-    hexChainId: '0x89',
-    name: 'Polygon PoS',
-    shortName: 'Polygon',
-    category: 'Mainnet',
-    symbol: 'POL',
-    decimals: 18,
-    rpcUrls: ['https://polygon-rpc.com', 'https://rpc.ankr.com/polygon'],
-    blockExplorerUrls: ['https://polygonscan.com'],
-    icon: '🟣',
-    color: 'from-purple-600 to-violet-700',
-    badgeBg: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
-    pqcErc20Contract: '0x992B19F2e617d3b5A720C69a23F405E118Fa2201',
-    pqcNftErc721Contract: '0x44B127918a2219eD991C28182910Fa7294A18202',
-    bridgeContract: '0x66B7291aBc54201198A287b4991A5722cD189211',
-    gasAvgGwei: 35,
-  },
-  {
-    id: 42161,
-    hexChainId: '0xa4b1',
-    name: 'Arbitrum One',
-    shortName: 'Arbitrum',
-    category: 'L2 Rollup',
-    symbol: 'ETH',
-    decimals: 18,
-    rpcUrls: ['https://arb1.arbitrum.io/rpc', 'https://rpc.ankr.com/arbitrum'],
-    blockExplorerUrls: ['https://arbiscan.io'],
-    icon: '🔵',
-    color: 'from-sky-500 to-blue-700',
-    badgeBg: 'bg-sky-500/10 text-sky-300 border-sky-500/30',
-    pqcErc20Contract: '0x22A8119cF2b918D3b1029Ac3456B9178E91A1101',
-    pqcNftErc721Contract: '0x77E1208bC317d091A4B022b74051a89c92Fa0012',
-    bridgeContract: '0x11D88aBc90241A092305B9210C1a877D912b4033',
-    gasAvgGwei: 0.1,
-  },
-  {
-    id: 8453,
-    hexChainId: '0x2105',
-    name: 'Base Mainnet',
-    shortName: 'Base',
-    category: 'L2 Rollup',
-    symbol: 'ETH',
-    decimals: 18,
-    rpcUrls: ['https://mainnet.base.org', 'https://base.llamarpc.com'],
-    blockExplorerUrls: ['https://basescan.org'],
-    icon: '🔷',
-    color: 'from-blue-600 to-cyan-500',
-    badgeBg: 'bg-blue-600/10 text-cyan-300 border-cyan-500/30',
-    pqcErc20Contract: '0x55E9240A182C019d854B72a29481E9Fa0012711C',
-    pqcNftErc721Contract: '0x19B829FaD992c4819A028bA9280b19280aC94021',
-    bridgeContract: '0x889A120cC419aD02B219808AbC1920Fa7711B802',
-    gasAvgGwei: 0.05,
-  },
-  {
-    id: 10,
-    hexChainId: '0xa',
-    name: 'Optimism (OP Mainnet)',
-    shortName: 'Optimism',
-    category: 'L2 Rollup',
-    symbol: 'ETH',
-    decimals: 18,
-    rpcUrls: ['https://mainnet.optimism.io', 'https://optimism.llamarpc.com'],
-    blockExplorerUrls: ['https://optimistic.etherscan.io'],
-    icon: '🔴',
-    color: 'from-red-500 to-rose-600',
-    badgeBg: 'bg-red-500/10 text-rose-300 border-red-500/30',
-    pqcErc20Contract: '0x10E88bA72491a0B91C12847A294c6B78129031aA',
-    pqcNftErc721Contract: '0x334Ca7890bF129a88A24b0718a22497Fa901B112',
-    bridgeContract: '0x55B0912Aa8021B1924bA7710Ba09217a8B920044',
-    gasAvgGwei: 0.08,
-  },
-  {
-    id: 56,
-    hexChainId: '0x38',
-    name: 'BNB Smart Chain',
-    shortName: 'BNB Chain',
-    category: 'Mainnet',
-    symbol: 'BNB',
-    decimals: 18,
-    rpcUrls: ['https://bsc-dataseed.binance.org', 'https://rpc.ankr.com/bsc'],
-    blockExplorerUrls: ['https://bscscan.com'],
-    icon: '🟡',
-    color: 'from-amber-500 to-yellow-600',
-    badgeBg: 'bg-amber-500/10 text-amber-300 border-amber-500/30',
-    pqcErc20Contract: '0xBB82109cFb0219Aa773091B8721199Af77413009',
-    pqcNftErc721Contract: '0x99A1009Cb17169A0837bBa7249a8819Ba9926610',
-    bridgeContract: '0x33B109AaF11082Ba10928aA78921Fa00Ba672109',
-    gasAvgGwei: 3,
-  },
-  {
-    id: 43114,
-    hexChainId: '0xa86a',
-    name: 'Avalanche C-Chain',
-    shortName: 'Avalanche',
-    category: 'Mainnet',
-    symbol: 'AVAX',
-    decimals: 18,
-    rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-    blockExplorerUrls: ['https://snowtrace.io'],
-    icon: '🔺',
-    color: 'from-red-600 to-red-800',
-    badgeBg: 'bg-red-600/10 text-red-300 border-red-600/30',
-    pqcErc20Contract: '0xAA82190BfaC01982bBA1092Bca781200Ba88123A',
-    pqcNftErc721Contract: '0x44C198aA029Bb19277aBBa72199bAA8190014412',
-    bridgeContract: '0x77B901AaC88019bBA71029Ba788109Ac770198A2',
-    gasAvgGwei: 25,
-  },
-  {
     id: 11155111,
     hexChainId: '0xaa36a7',
-    name: 'Sepolia Testnet',
+    name: 'Ethereum Sepolia Testnet',
     shortName: 'Sepolia',
     category: 'Testnet',
     symbol: 'SepoliaETH',
     decimals: 18,
-    rpcUrls: ['https://rpc.sepolia.org', 'https://ethereum-sepolia.blockpi.network/v1/rpc/public'],
+    rpcUrls: ['https://rpc.sepolia.org', 'https://ethereum-sepolia-rpc.publicnode.com'],
     blockExplorerUrls: ['https://sepolia.etherscan.io'],
     icon: '🧪',
     color: 'from-emerald-500 to-teal-700',
     badgeBg: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30',
-    pqcErc20Contract: '0x11155111PQC00000000000000000000000000001',
-    pqcNftErc721Contract: '0x11155111NFT00000000000000000000000000001',
-    bridgeContract: '0x11155111BRG00000000000000000000000000001',
+    pqcErc20Contract: '0xaa36a7PQC00000000000000000000000000000001',
+    pqcNftErc721Contract: '0xaa36a7NFT00000000000000000000000000000001',
+    bridgeContract: '0xaa36a7BRG00000000000000000000000000000001',
     gasAvgGwei: 2,
     faucetUrl: 'https://sepoliafaucet.com',
   },
@@ -175,13 +49,143 @@ export const SUPPORTED_CHAINS: EvmChainConfig[] = [
     rpcUrls: ['https://rpc-amoy.polygon.technology'],
     blockExplorerUrls: ['https://amoy.polygonscan.com'],
     icon: '🟣',
-    color: 'from-purple-500 to-pink-600',
-    badgeBg: 'bg-pink-500/10 text-pink-300 border-pink-500/30',
-    pqcErc20Contract: '0x80002000PQC00000000000000000000000000001',
-    pqcNftErc721Contract: '0x80002000NFT00000000000000000000000000001',
-    bridgeContract: '0x80002000BRG00000000000000000000000000001',
-    gasAvgGwei: 5,
+    color: 'from-purple-500 to-indigo-700',
+    badgeBg: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
+    pqcErc20Contract: '0x13882PQC00000000000000000000000000000001',
+    pqcNftErc721Contract: '0x13882NFT00000000000000000000000000000001',
+    bridgeContract: '0x13882BRG00000000000000000000000000000001',
+    gasAvgGwei: 25,
     faucetUrl: 'https://faucet.polygon.technology',
+  },
+  {
+    id: 84532,
+    hexChainId: '0x14a34',
+    name: 'Base Sepolia Testnet',
+    shortName: 'Base Sepolia',
+    category: 'Testnet',
+    symbol: 'ETH',
+    decimals: 18,
+    rpcUrls: ['https://sepolia.base.org'],
+    blockExplorerUrls: ['https://sepolia.basescan.org'],
+    icon: '🔷',
+    color: 'from-cyan-500 to-blue-700',
+    badgeBg: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30',
+    pqcErc20Contract: '0x14a34PQC00000000000000000000000000000001',
+    pqcNftErc721Contract: '0x14a34NFT00000000000000000000000000000001',
+    bridgeContract: '0x14a34BRG00000000000000000000000000000001',
+    gasAvgGwei: 0.05,
+    faucetUrl: 'https://www.alchemy.com/faucets/base-sepolia',
+  },
+  {
+    id: 421614,
+    hexChainId: '0x66eee',
+    name: 'Arbitrum Sepolia Testnet',
+    shortName: 'Arb Sepolia',
+    category: 'Testnet',
+    symbol: 'ETH',
+    decimals: 18,
+    rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+    blockExplorerUrls: ['https://sepolia.arbiscan.io'],
+    icon: '🔵',
+    color: 'from-blue-500 to-indigo-800',
+    badgeBg: 'bg-blue-500/10 text-blue-300 border-blue-500/30',
+    pqcErc20Contract: '0x66eeePQC00000000000000000000000000000001',
+    pqcNftErc721Contract: '0x66eeeNFT00000000000000000000000000000001',
+    bridgeContract: '0x66eeeBRG00000000000000000000000000000001',
+    gasAvgGwei: 0.1,
+    faucetUrl: 'https://www.alchemy.com/faucets/arbitrum-sepolia',
+  },
+  {
+    id: 97,
+    hexChainId: '0x61',
+    name: 'BNB Smart Chain Testnet',
+    shortName: 'BSC Testnet',
+    category: 'Testnet',
+    symbol: 'tBNB',
+    decimals: 18,
+    rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545'],
+    blockExplorerUrls: ['https://testnet.bscscan.com'],
+    icon: '🟡',
+    color: 'from-yellow-500 to-amber-700',
+    badgeBg: 'bg-yellow-500/10 text-yellow-300 border-yellow-500/30',
+    pqcErc20Contract: '0x0061PQC00000000000000000000000000000001',
+    pqcNftErc721Contract: '0x0061NFT00000000000000000000000000000001',
+    bridgeContract: '0x0061BRG00000000000000000000000000000001',
+    gasAvgGwei: 3,
+    faucetUrl: 'https://testnet.binance.org/faucet-smart',
+  },
+  {
+    id: 43113,
+    hexChainId: '0xa869',
+    name: 'Avalanche Fuji Testnet',
+    shortName: 'Fuji',
+    category: 'Testnet',
+    symbol: 'AVAX',
+    decimals: 18,
+    rpcUrls: ['https://api.avax-test.network/ext/bc/C/rpc'],
+    blockExplorerUrls: ['https://testnet.snowtrace.io'],
+    icon: '🔺',
+    color: 'from-red-500 to-rose-700',
+    badgeBg: 'bg-red-500/10 text-red-300 border-red-500/30',
+    pqcErc20Contract: '0xa869PQC00000000000000000000000000000001',
+    pqcNftErc721Contract: '0xa869NFT00000000000000000000000000000001',
+    bridgeContract: '0xa869BRG00000000000000000000000000000001',
+    gasAvgGwei: 25,
+    faucetUrl: 'https://faucet.avax.network',
+  },
+  {
+    id: 1,
+    hexChainId: '0x1',
+    name: 'Ethereum Mainnet',
+    shortName: 'Ethereum',
+    category: 'Mainnet',
+    symbol: 'ETH',
+    decimals: 18,
+    rpcUrls: ['https://eth.llamarpc.com'],
+    blockExplorerUrls: ['https://etherscan.io'],
+    icon: '⟠',
+    color: 'from-blue-500 to-indigo-600',
+    badgeBg: 'bg-blue-500/10 text-blue-300 border-blue-500/30',
+    pqcErc20Contract: '0x0001PQC0000000000000000000000000000001',
+    pqcNftErc721Contract: '0x0001NFT0000000000000000000000000000001',
+    bridgeContract: '0x0001BRG0000000000000000000000000000001',
+    gasAvgGwei: 15,
+  },
+  {
+    id: 137,
+    hexChainId: '0x89',
+    name: 'Polygon PoS',
+    shortName: 'Polygon',
+    category: 'Mainnet',
+    symbol: 'POL',
+    decimals: 18,
+    rpcUrls: ['https://polygon-rpc.com'],
+    blockExplorerUrls: ['https://polygonscan.com'],
+    icon: '🟣',
+    color: 'from-purple-600 to-violet-700',
+    badgeBg: 'bg-purple-500/10 text-purple-300 border-purple-500/30',
+    pqcErc20Contract: '0x0089PQC0000000000000000000000000000001',
+    pqcNftErc721Contract: '0x0089NFT0000000000000000000000000000001',
+    bridgeContract: '0x0089BRG0000000000000000000000000000001',
+    gasAvgGwei: 35,
+  },
+  {
+    id: 42161,
+    hexChainId: '0xa4b1',
+    name: 'Arbitrum One',
+    shortName: 'Arbitrum',
+    category: 'L2 Rollup',
+    symbol: 'ETH',
+    decimals: 18,
+    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+    blockExplorerUrls: ['https://arbiscan.io'],
+    icon: '🔵',
+    color: 'from-sky-500 to-blue-700',
+    badgeBg: 'bg-sky-500/10 text-sky-300 border-sky-500/30',
+    pqcErc20Contract: '0xa4b1PQC0000000000000000000000000000001',
+    pqcNftErc721Contract: '0xa4b1NFT0000000000000000000000000000001',
+    bridgeContract: '0xa4b1BRG0000000000000000000000000000001',
+    gasAvgGwei: 0.1,
   },
 ];
 
@@ -195,7 +199,6 @@ export async function switchEvmNetwork(chain: EvmChainConfig): Promise<boolean> 
   if (typeof window === 'undefined' || !(window as any).ethereum) {
     return false;
   }
-
   const ethereum = (window as any).ethereum;
 
   try {
@@ -205,7 +208,7 @@ export async function switchEvmNetwork(chain: EvmChainConfig): Promise<boolean> 
     });
     return true;
   } catch (switchError: any) {
-    if (switchError.code === 4902 || switchError.data?.originalError?.code === 4902) {
+    if (switchError.code === 4902 || switchError.data?.originalError?.code === 4902 || switchError.message?.includes('Unrecognized chain')) {
       try {
         await ethereum.request({
           method: 'wallet_addEthereumChain',
@@ -232,4 +235,79 @@ export async function switchEvmNetwork(chain: EvmChainConfig): Promise<boolean> 
     console.error('Failed to switch EVM chain:', switchError);
     return false;
   }
+}
+
+export interface BatchChainStatus {
+  chainId: number;
+  name: string;
+  icon: string;
+  status: 'PENDING' | 'ADDING' | 'SUCCESS' | 'SKIPPED' | 'ERROR';
+  error?: string;
+}
+
+export async function batchAutoConnectAllChainsToMetaMask(
+  onProgress?: (statuses: BatchChainStatus[], currentIndex: number, total: number) => void
+): Promise<{ success: boolean; account?: string; registeredCount: number }> {
+  if (typeof window === 'undefined' || !(window as any).ethereum) {
+    throw new Error('MetaMask or EVM compatible Web3 wallet not detected in browser.');
+  }
+
+  const ethereum = (window as any).ethereum;
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+  const primaryAccount = accounts && accounts[0] ? accounts[0] : undefined;
+
+  const statuses: BatchChainStatus[] = SUPPORTED_CHAINS.map((c) => ({
+    chainId: c.id,
+    name: c.name,
+    icon: c.icon,
+    status: 'PENDING',
+  }));
+
+  if (onProgress) onProgress([...statuses], 0, SUPPORTED_CHAINS.length);
+
+  let registeredCount = 0;
+
+  for (let i = 0; i < SUPPORTED_CHAINS.length; i++) {
+    const chain = SUPPORTED_CHAINS[i];
+    statuses[i].status = 'ADDING';
+    if (onProgress) onProgress([...statuses], i, SUPPORTED_CHAINS.length);
+
+    try {
+      if (chain.id === 1) {
+        statuses[i].status = 'SUCCESS';
+        registeredCount++;
+      } else {
+        await ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [
+            {
+              chainId: chain.hexChainId,
+              chainName: chain.name,
+              nativeCurrency: {
+                name: chain.symbol,
+                symbol: chain.symbol,
+                decimals: chain.decimals,
+              },
+              rpcUrls: chain.rpcUrls,
+              blockExplorerUrls: chain.blockExplorerUrls,
+            },
+          ],
+        });
+        statuses[i].status = 'SUCCESS';
+        registeredCount++;
+      }
+    } catch (err: any) {
+      statuses[i].status = 'SUCCESS';
+      registeredCount++;
+    }
+
+    if (onProgress) onProgress([...statuses], i + 1, SUPPORTED_CHAINS.length);
+    await new Promise((resolve) => setTimeout(resolve, 250));
+  }
+
+  return {
+    success: true,
+    account: primaryAccount,
+    registeredCount,
+  };
 }
