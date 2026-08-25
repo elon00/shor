@@ -15,7 +15,7 @@
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/elon00/shor)
 
 
-[Explore Live Demo](http://localhost:3000) • [GitHub Repository](https://github.com/elon00/shor) • [Testnet Registry](testnet-deployments.json) • [Architecture Whitepaper](DEPLOYMENT_MULTICHAIN.md)
+[Explore Live Demo (Netlify)](https://shor-netlify.netlify.app) • [Local Demo](http://localhost:3000) • [GitHub Repository](https://github.com/elon00/shor) • [Testnet Registry](testnet-deployments.json) • [Architecture Whitepaper](DEPLOYMENT_MULTICHAIN.md)
 
 </div>
 
