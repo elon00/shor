@@ -587,7 +587,7 @@ export default function App() {
         setConfig={setConfig}
         wallet={wallet}
         setWallet={setWallet}
-        population={grid.flat().filter((c) => c.state !== 'dead').length}
+        population={grid && Array.isArray(grid) ? grid.flat().filter((c) => c && c.state !== 'dead').length : 0}
         onClaimAirdrop={() => addTerminalMessage('Claimed Unlimited +10,000 $PQC Faucet!')}
         onTriggerPqcAudit={() => addTerminalMessage('Triggered PQC Quantum Security Audit')}
         onStartWweMatch={() => addTerminalMessage('Started WWE Metaverse AI Fight Match')}
