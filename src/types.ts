@@ -76,24 +76,40 @@ export interface QuantumAttackState {
   lastAttackTimestamp?: string;
 }
 
-// Web3 & Ethereum State Interfaces
+// Multichain Web3 & EVM State
 export interface Web3WalletState {
   isConnected: boolean;
   address: string;
   network: string;
   chainId: number;
+  nativeBalance: number;
   ethBalance: number;
   pqcTokenBalance: number;
   inrBalance: number;
   pqcErc20Contract: string;
   pqcNftErc721Contract: string;
+  bridgeContract: string;
   isMetaMaskDetected: boolean;
+}
+
+// Cross-Chain Bridge Transfer State
+export interface CrossChainBridgeState {
+  isOpen: boolean;
+  sourceChainId: number;
+  targetChainId: number;
+  tokenType: 'PQC' | 'NFT';
+  amount: number;
+  targetAddress: string;
+  status: 'IDLE' | 'LOCKING' | 'GENERATING_PROOF' | 'RELAYING' | 'COMPLETED' | 'FAILED';
+  txHash?: string;
+  bridgeFeePqc: number;
 }
 
 // PQC NFT Metadata & Listing Interface
 export interface PqcNftItem {
   id: string;
   tokenId: number;
+  chainId: number;
   name: string;
   description: string;
   image: string;
@@ -117,10 +133,11 @@ export interface PqcNftItem {
 // INR Exchange & Payment Transaction Interface
 export interface InrTransaction {
   id: string;
+  chainId: number;
   type: 'BUY_CRYPTO' | 'SELL_CRYPTO' | 'DEPOSIT_INR' | 'WITHDRAW_INR';
   paymentMethod: 'UPI_GPAY' | 'UPI_PHONEPE' | 'UPI_PAYTM' | 'NETBANKING' | 'DEBIT_CARD';
   cryptoAmount: number;
-  cryptoSymbol: 'ETH' | '$PQC';
+  cryptoSymbol: 'ETH' | '$PQC' | 'POL' | 'BNB' | 'AVAX';
   inrAmount: number;
   exchangeRate: number;
   status: 'SUCCESS' | 'PENDING' | 'FAILED';
@@ -172,4 +189,3 @@ export interface WweMatchState {
   }[];
   ringVenue: 'Quantum Mania Ring' | 'Lattice Royal Rumble' | 'Metaverse Smackdown Arena';
 }
-

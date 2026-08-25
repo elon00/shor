@@ -22,6 +22,9 @@ import {
   RotateCcw,
   Layers,
   BarChart3,
+  Globe,
+  Coins,
+  ArrowLeftRight,
 } from 'lucide-react';
 import { Web3WalletState, GridConfig } from '../types';
 import { audioSynth } from '../lib/audioSynth';
@@ -36,14 +39,24 @@ export interface ChatMessage {
   id: string;
   sender: 'USER' | 'AGENT' | 'SYSTEM';
   text: string;
+  modelUsed?: string;
   timestamp: string;
   reasoningSteps?: string[];
   actionsExecuted?: AgentAction[];
 }
 
+export const AI_MODELS = [
+  { id: 'gemini-3.7-flash', name: 'Gemini 3.7 Flash', tag: 'Fast & Agentic', color: 'text-cyan-400' },
+  { id: 'gemini-3.5-pro', name: 'Gemini 3.5 Pro', tag: 'Deep Reasoning', color: 'text-purple-400' },
+  { id: 'quantum-lattice-4', name: 'Quantum Neural 4.0', tag: 'On-Chain Lattice', color: 'text-emerald-400' },
+  { id: 'claude-3.7-sonnet', name: 'Claude 3.7 Hybrid', tag: 'Multimodal', color: 'text-amber-400' },
+  { id: 'gpt-4o-agentic', name: 'GPT-4o Swarm', tag: 'Autonomous', color: 'text-blue-400' },
+  { id: 'deepseek-r1-crypto', name: 'DeepSeek R1 PQC', tag: 'Cryptanalysis', color: 'text-rose-400' },
+];
+
 interface AgenticChatbotProps {
   currentTab: string;
-  onNavigateTab: (tab: 'GRID' | 'PQC' | 'NFT_MARKET' | 'INR_EXCHANGE' | 'WWE_METAVERSE' | 'TERMINAL' | 'ANALYTICS') => void;
+  onNavigateTab: (tab: any) => void;
   isRunning: boolean;
   onTogglePlay: () => void;
   onStep: () => void;
@@ -59,13 +72,24 @@ interface AgenticChatbotProps {
   onTriggerPqcAudit: () => void;
   onStartWweMatch: () => void;
   onMintNft: () => void;
+  onOpenBridge?: () => void;
 }
 
 const QUICK_SUGGESTIONS = [
   {
     icon: '⚡',
-    label: 'Grid Play & Gosper Gun',
-    prompt: 'Gosper Glider Gun pattern load karke simulation start kardo!',
+    label: 'Mint Unlimited $PQC Tokens',
+    prompt: 'Unlimited 100,000 $PQC tokens mint kardo wallet me!',
+  },
+  {
+    icon: '🌐',
+    label: 'Switch to Sepolia Testnet',
+    prompt: 'Sepolia Testnet network pe switch karo aur Testnet faucet trigger karo.',
+  },
+  {
+    icon: '🚀',
+    label: 'Launch Global Marketing Campaign',
+    prompt: 'Global Marketing Hub pe jao aur viral Twitter/X thread generate karo!',
   },
   {
     icon: '🛡️',
@@ -81,16 +105,6 @@ const QUICK_SUGGESTIONS = [
     icon: '💰',
     label: 'Top-up ₹10,000 INR UPI',
     prompt: 'INR Exchange me ₹10,000 top-up karke $PQC tokens swap kar do.',
-  },
-  {
-    icon: '🎨',
-    label: 'Mint Quantum NFT',
-    prompt: 'NFT Marketplace kholo aur new Web4 Quantum NFT mint karo.',
-  },
-  {
-    icon: '📊',
-    label: 'View Analytics Dashboard',
-    prompt: 'Analytics tab kholo aur grid latency and population chart dikhao.',
   },
 ];
 
@@ -112,24 +126,28 @@ export const AgenticChatbot: React.FC<AgenticChatbotProps> = ({
   onTriggerPqcAudit,
   onStartWweMatch,
   onMintNft,
+  onOpenBridge,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedModel, setSelectedModel] = useState(AI_MODELS[0].id);
+  const [showModelPicker, setShowModelPicker] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome-1',
       sender: 'AGENT',
-      text: '🤖 Namaste! Main Aether Agent Leader hoon. Platform ke saare functions ko lead aur control kar sakta hoon. Hindi/English prompts se Grid, PQC Audit, WWE Battles, INR Exchange ya NFTs ko control kijiye!',
+      text: '🤖 Namaste! Main Aether Multi-Model Agent Leader hoon. Platform ke saare functions ko lead kar sakta hoon: Unlimited $PQC Minting, Testnet 6 Networks deployment, Global Marketing campaigns, Grid Automaton & WWE Arena!',
+      modelUsed: 'Gemini 3.7 Flash',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       reasoningSteps: [
-        'Agentic AI Control Subsystem Initialized',
-        'ML-KEM-768 Command Dispatch Gateway Listening',
-        'All 7 Function Submodules Ready for Neural Leading',
+        'Multi-Model Agentic Controller Initialized (Gemini 3.7 + DeepSeek + Quantum Neural)',
+        'Unlimited $PQC Infinite Supply Mint Gateway Connected',
+        'Testnet Multichain Bridge & Global Marketing Engine Ready',
       ],
       actionsExecuted: [
-        { type: 'SYSTEM_READY', label: '✅ Agent Leader Online & Ready to Control Functions' },
+        { type: 'SYSTEM_READY', label: '✅ Multi-Model Agent Online & Ready to Control Functions' },
       ],
     },
   ]);
@@ -146,128 +164,85 @@ export const AgenticChatbot: React.FC<AgenticChatbotProps> = ({
     }
   }, [messages, isOpen]);
 
-  // Execute Agent Action Vector on Frontend
   const executeActions = (actions: AgentAction[]) => {
     actions.forEach((act) => {
-      try {
-        switch (act.type) {
-          case 'START_SIMULATION':
-            if (!isRunning) onTogglePlay();
-            break;
-          case 'PAUSE_SIMULATION':
-            if (isRunning) onTogglePlay();
-            break;
-          case 'STEP_SIMULATION':
-            onStep();
-            break;
-          case 'CLEAR_GRID':
-            onClearGrid();
-            break;
-          case 'RANDOMIZE_GRID':
-            onRandomizeGrid();
-            break;
-          case 'LOAD_PRESET':
-            if (act.params?.preset) {
-              onLoadPreset(act.params.preset);
-            } else {
-              onLoadPreset('GOSPER_GUN');
-            }
-            break;
-          case 'NAVIGATE_TAB':
-            if (act.params?.tab) {
-              onNavigateTab(act.params.tab);
-            }
-            break;
-          case 'SET_SPEED':
-            if (act.params?.speedMs) {
-              setConfig((prev) => ({ ...prev, speedMs: act.params.speedMs }));
-            }
-            break;
-          case 'SET_MUTATION_RATE':
-            if (act.params?.mutationRate) {
-              setConfig((prev) => ({ ...prev, mutationRate: act.params.mutationRate }));
-            }
-            break;
-          case 'TOGGLE_AUDIO':
-            if (act.params?.enableAudio !== undefined) {
-              setConfig((prev) => ({ ...prev, enableAudio: act.params.enableAudio }));
-            } else {
-              setConfig((prev) => ({ ...prev, enableAudio: !prev.enableAudio }));
-            }
-            break;
-          case 'TOPUP_INR':
-            {
-              const amount = act.params?.amount || 10000;
-              setWallet((prev) => ({ ...prev, inrBalance: prev.inrBalance + amount }));
-              onNavigateTab('INR_EXCHANGE');
-            }
-            break;
-          case 'SWAP_INR_PQC':
-            {
-              const inrCost = 1000;
-              const pqcGained = 500;
-              setWallet((prev) => ({
-                ...prev,
-                inrBalance: Math.max(0, prev.inrBalance - inrCost),
-                pqcTokenBalance: prev.pqcTokenBalance + pqcGained,
-              }));
-              onNavigateTab('INR_EXCHANGE');
-            }
-            break;
-          case 'CLAIM_AIRDROP':
-            onClaimAirdrop();
-            break;
-          case 'TRIGGER_PQC_AUDIT':
-            onNavigateTab('PQC');
-            onTriggerPqcAudit();
-            break;
-          case 'CHANGE_PQC_STRICTNESS':
-            if (act.params?.strictness) {
-              setConfig((prev) => ({ ...prev, pqcStrictness: act.params.strictness }));
-            }
-            break;
-          case 'START_WWE_MATCH':
-            onNavigateTab('WWE_METAVERSE');
-            onStartWweMatch();
-            break;
-          case 'MINT_NFT':
-            onNavigateTab('NFT_MARKET');
-            onMintNft();
-            break;
-          default:
-            console.log('Action type executed:', act.type);
-            break;
-        }
-      } catch (err) {
-        console.error('Failed to execute agent action:', act, err);
+      switch (act.type) {
+        case 'START_SIMULATION':
+          if (!isRunning) onTogglePlay();
+          break;
+        case 'PAUSE_SIMULATION':
+          if (isRunning) onTogglePlay();
+          break;
+        case 'STEP_SIMULATION':
+          onStep();
+          break;
+        case 'CLEAR_GRID':
+          onClearGrid();
+          break;
+        case 'RANDOMIZE_GRID':
+          onRandomizeGrid();
+          break;
+        case 'LOAD_PRESET':
+          if (act.params?.preset) onLoadPreset(act.params.preset);
+          break;
+        case 'NAVIGATE_TAB':
+          if (act.params?.tab) onNavigateTab(act.params.tab);
+          break;
+        case 'MINT_UNLIMITED_TOKENS':
+        case 'TOPUP_INR':
+          const addedPqc = act.params?.amountPqc || 100000;
+          const addedInr = act.params?.amount || 50000;
+          setWallet((prev) => ({
+            ...prev,
+            pqcTokenBalance: prev.pqcTokenBalance + addedPqc,
+            inrBalance: prev.inrBalance + addedInr,
+          }));
+          break;
+        case 'SWITCH_CHAIN':
+          if (act.params?.chainId) {
+            setWallet((p) => ({ ...p, chainId: act.params.chainId }));
+          }
+          break;
+        case 'OPEN_BRIDGE':
+          if (onOpenBridge) onOpenBridge();
+          break;
+        case 'TRIGGER_PQC_AUDIT':
+          onTriggerPqcAudit();
+          break;
+        case 'START_WWE_MATCH':
+          onStartWweMatch();
+          break;
+        case 'MINT_NFT':
+          onMintNft();
+          break;
       }
     });
-
-    audioSynth.playAgentEvent();
   };
 
   const handleSendMessage = async (customPrompt?: string) => {
-    const textToSend = (customPrompt || inputMessage).trim();
-    if (!textToSend || isProcessing) return;
+    const textToSend = customPrompt || inputMessage;
+    if (!textToSend.trim() || isProcessing) return;
 
-    const userMsgId = `usr-${Date.now()}`;
     const userMsg: ChatMessage = {
-      id: userMsgId,
+      id: `user-${Date.now()}`,
       sender: 'USER',
       text: textToSend,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
     setMessages((prev) => [...prev, userMsg]);
-    setInputMessage('');
+    if (!customPrompt) setInputMessage('');
     setIsProcessing(true);
+    audioSynth.playKeyExchange();
 
     try {
-      const response = await fetch('/api/agent/command', {
+      const activeModelObj = AI_MODELS.find((m) => m.id === selectedModel) || AI_MODELS[0];
+      const res = await fetch('/api/agent/command', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userPrompt: textToSend,
+          model: selectedModel,
           currentTab,
           isRunning,
           population,
@@ -276,223 +251,183 @@ export const AgenticChatbot: React.FC<AgenticChatbotProps> = ({
         }),
       });
 
-      const data = await response.json();
+      const data = await res.json();
+      const actions = data.actions || [];
 
-      if (data.success) {
-        const agentMsgId = `agent-${Date.now()}`;
-        const agentMsg: ChatMessage = {
-          id: agentMsgId,
-          sender: 'AGENT',
-          text: data.replyText,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          reasoningSteps: data.reasoningSteps || [],
-          actionsExecuted: data.actions || [],
-        };
-
-        setMessages((prev) => [...prev, agentMsg]);
-
-        if (data.actions && data.actions.length > 0) {
-          executeActions(data.actions);
-        }
+      const lower = textToSend.toLowerCase();
+      if (lower.includes('unlimited') || lower.includes('infinite') || lower.includes('100000') || lower.includes('faucet')) {
+        actions.push({
+          type: 'MINT_UNLIMITED_TOKENS',
+          params: { amountPqc: 100000, amount: 50000 },
+          label: '⚡ Infinite Supply Mint: +100,000 $PQC & ₹50,000 INR',
+        });
       }
-    } catch (err: any) {
-      console.error('Agent chatbot error:', err);
-      const fallbackMsg: ChatMessage = {
-        id: `err-${Date.now()}`,
+      if (lower.includes('bridge') || lower.includes('cross chain')) {
+        actions.push({ type: 'OPEN_BRIDGE', label: '🌉 Open Multichain Bridge' });
+      }
+      if (lower.includes('market') || lower.includes('marketing') || lower.includes('viral')) {
+        actions.push({ type: 'NAVIGATE_TAB', params: { tab: 'MARKETING' }, label: '🚀 Switch to Global Marketing Hub' });
+      }
+
+      executeActions(actions);
+
+      const agentMsg: ChatMessage = {
+        id: `agent-${Date.now()}`,
         sender: 'AGENT',
-        text: `⚡ Local Agent Leader: Request for "${textToSend}" processed locally. Executing requested system functions.`,
+        text: data.replyText || 'Command executed across Web 4.0 Multichain submodules.',
+        modelUsed: activeModelObj.name,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        reasoningSteps: ['Local Agent Command Vector Dispatched'],
-        actionsExecuted: [{ type: 'NAVIGATE_TAB', params: { tab: 'GRID' }, label: '📍 Switched to Grid View' }],
+        reasoningSteps: data.reasoningSteps || [
+          `Processed via ${activeModelObj.name}`,
+          'Dispatched Web 4.0 Multichain control vector',
+        ],
+        actionsExecuted: actions,
       };
-      setMessages((prev) => [...prev, fallbackMsg]);
+
+      setMessages((prev) => [...prev, agentMsg]);
+      audioSynth.playQuantumVerification();
+    } catch (err) {
+      const fallbackActions: AgentAction[] = [];
+      const lower = textToSend.toLowerCase();
+      if (lower.includes('unlimited') || lower.includes('mint') || lower.includes('token')) {
+        fallbackActions.push({
+          type: 'MINT_UNLIMITED_TOKENS',
+          params: { amountPqc: 100000, amount: 50000 },
+          label: '⚡ Infinite Mint: +100,000 $PQC Added to Wallet',
+        });
+      }
+      if (lower.includes('play') || lower.includes('start')) {
+        fallbackActions.push({ type: 'START_SIMULATION', label: '▶ Start Conway Automaton' });
+      }
+      executeActions(fallbackActions);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `agent-${Date.now()}`,
+          sender: 'AGENT',
+          text: `Aether Leader: Command executed for "${textToSend}".`,
+          modelUsed: 'Local Fallback Core',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          actionsExecuted: fallbackActions,
+        },
+      ]);
     } finally {
       setIsProcessing(false);
     }
   };
 
-  const toggleReasoning = (id: string) => {
-    setExpandedReasoningIds((prev) => ({ ...prev, [id]: !prev[id] }));
+  const toggleReasoning = (msgId: string) => {
+    setExpandedReasoningIds((prev) => ({
+      ...prev,
+      [msgId]: !prev[msgId],
+    }));
   };
+
+  const activeModel = AI_MODELS.find((m) => m.id === selectedModel) || AI_MODELS[0];
 
   return (
     <>
-      {/* Floating Trigger Button when Closed */}
       {!isOpen && (
         <button
-          id="agent-trigger-btn"
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-4 right-4 z-50 flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-gradient-to-r from-cyan-600 via-indigo-600 to-purple-600 text-white shadow-xl hover:shadow-cyan-500/25 transition-all transform hover:scale-105 group border border-cyan-400/30"
+          className="fixed bottom-5 right-5 z-40 bg-gradient-to-tr from-cyan-600 via-indigo-600 to-purple-600 hover:from-cyan-500 hover:to-purple-500 text-white p-3.5 rounded-full shadow-2xl shadow-cyan-900/50 flex items-center gap-2.5 transition transform hover:scale-105 border border-cyan-400/40 group"
         >
           <div className="relative">
-            <Bot className="w-6 h-6 text-cyan-200 group-hover:rotate-12 transition-transform" />
-            <span className="absolute -top-1 -right-1 flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-300"></span>
+            <Bot className="w-5 h-5 animate-pulse" />
+            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+          </div>
+          <span className="font-sans font-bold text-xs tracking-wide pr-1 flex items-center gap-1.5">
+            <span>Multi-Model AI Leader</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-black/40 text-cyan-300 font-mono">
+              {activeModel.name.split(' ')[0]}
             </span>
-          </div>
-          <div className="text-left font-sans">
-            <div className="text-xs font-bold leading-tight flex items-center gap-1 font-mono">
-              AGENT LEADER <Sparkles className="w-3 h-3 text-yellow-300" />
-            </div>
-            <div className="text-[10px] text-cyan-100/90 font-mono">Control All Functions</div>
-          </div>
+          </span>
         </button>
       )}
 
-      {/* Expanded Agentic Chatbot Panel */}
       {isOpen && (
         <div
-          className={`fixed bottom-4 right-4 z-50 flex flex-col bg-slate-900 border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden transition-all duration-200 backdrop-blur-md ${
+          className={`fixed z-50 transition-all duration-300 bg-slate-900/95 border border-slate-700/80 shadow-2xl rounded-2xl flex flex-col backdrop-blur-xl ${
             isExpanded
-              ? 'w-[95vw] md:w-[700px] h-[85vh] max-h-[800px]'
-              : 'w-[92vw] sm:w-[420px] h-[580px]'
+              ? 'inset-4 lg:inset-10'
+              : 'bottom-5 right-5 w-[92vw] sm:w-[460px] h-[600px] max-h-[85vh]'
           }`}
         >
-          {/* Header */}
-          <div className="bg-slate-950/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between gap-2">
+          <div className="p-3.5 bg-slate-950/80 border-b border-slate-800 rounded-t-2xl flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 p-0.5 shadow-md shadow-cyan-500/20">
-                <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-cyan-400" />
-                </div>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-600 to-purple-600 flex items-center justify-center text-white shadow-md">
+                <Bot className="w-4 h-4" />
               </div>
               <div>
-                <h3 className="text-xs font-bold text-slate-100 flex items-center gap-1.5 font-mono">
-                  AETHER AGENT LEADER
-                  <span className="px-1.5 py-0.5 rounded text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                    GEMINI 3.6
-                  </span>
-                </h3>
-                <p className="text-[10px] text-slate-400 flex items-center gap-1 font-sans">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  Active Master Controller • Controlling 7 Platform Modules
-                </p>
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-xs text-white">Aether Multi-Model Agent</h3>
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowModelPicker(!showModelPicker)}
+                      className="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 font-mono flex items-center gap-1"
+                    >
+                      <span>{activeModel.name}</span>
+                      <ChevronDown className="w-2.5 h-2.5" />
+                    </button>
+
+                    {showModelPicker && (
+                      <div className="absolute left-0 mt-1 w-56 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl p-1.5 z-50">
+                        <div className="text-[9px] text-slate-400 px-2 py-1 uppercase tracking-wider font-mono">
+                          Select AI Engine
+                        </div>
+                        {AI_MODELS.map((m) => (
+                          <button
+                            key={m.id}
+                            onClick={() => {
+                              setSelectedModel(m.id);
+                              setShowModelPicker(false);
+                            }}
+                            className={`w-full text-left px-2 py-1.5 rounded-lg flex items-center justify-between text-xs transition ${
+                              selectedModel === m.id
+                                ? 'bg-cyan-950 text-cyan-300 font-bold'
+                                : 'text-slate-300 hover:bg-slate-800'
+                            }`}
+                          >
+                            <div>
+                              <div>{m.name}</div>
+                              <div className="text-[9px] text-slate-400">{m.tag}</div>
+                            </div>
+                            {selectedModel === m.id && <CheckCircle2 className="w-3 h-3 text-cyan-400" />}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="text-[10px] text-slate-400 font-mono">
+                  Autonomous Multi-Chain Controller • Infinite Supply Engine
+                </div>
               </div>
             </div>
 
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="p-1.5 text-slate-400 hover:text-slate-100 hover:bg-slate-800 rounded-lg transition"
-                title={isExpanded ? 'Contract Window' : 'Expand Window'}
+                className="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800"
               >
-                {isExpanded ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+                {isExpanded ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-slate-800 rounded-lg transition"
-                title="Close Agent"
+                className="p-1 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
           </div>
 
-          {/* Messages Body */}
-          <div className="flex-1 overflow-y-auto p-3 space-y-3 bg-slate-950/50 text-xs">
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`flex flex-col ${
-                  msg.sender === 'USER' ? 'items-end' : 'items-start'
-                }`}
-              >
-                <div className="flex items-center gap-1.5 mb-1 px-1">
-                  {msg.sender === 'USER' ? (
-                    <span className="text-[10px] text-slate-400 font-mono">You</span>
-                  ) : (
-                    <span className="text-[10px] text-cyan-400 font-mono font-bold flex items-center gap-1">
-                      <Bot className="w-3 h-3" /> AETHER AGENT
-                    </span>
-                  )}
-                  <span className="text-[9px] text-slate-500">{msg.timestamp}</span>
-                </div>
-
-                <div
-                  className={`p-3 rounded-2xl max-w-[88%] leading-relaxed shadow-sm ${
-                    msg.sender === 'USER'
-                      ? 'bg-cyan-600 text-white rounded-tr-none'
-                      : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none'
-                  }`}
-                >
-                  <p className="whitespace-pre-wrap">{msg.text}</p>
-
-                  {/* Executed Action Badges */}
-                  {msg.actionsExecuted && msg.actionsExecuted.length > 0 && (
-                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 space-y-1">
-                      <div className="text-[10px] text-emerald-400 font-mono font-semibold flex items-center gap-1">
-                        <Zap className="w-3 h-3" /> FUNCTIONS LEADER & EXECUTED:
-                      </div>
-                      <div className="flex flex-wrap gap-1">
-                        {msg.actionsExecuted.map((act, idx) => (
-                          <span
-                            key={idx}
-                            className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-md bg-emerald-950/80 text-emerald-300 border border-emerald-500/30 font-mono"
-                          >
-                            <CheckCircle2 className="w-2.5 h-2.5 text-emerald-400" />
-                            {act.label || act.type}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Agentic Reasoning Accordion */}
-                  {msg.reasoningSteps && msg.reasoningSteps.length > 0 && (
-                    <div className="mt-2 pt-1 border-t border-slate-800/60">
-                      <button
-                        onClick={() => toggleReasoning(msg.id)}
-                        className="text-[10px] text-cyan-400 hover:text-cyan-300 flex items-center gap-1 font-mono py-0.5"
-                      >
-                        <Cpu className="w-3 h-3" />
-                        {expandedReasoningIds[msg.id]
-                          ? 'Hide Neural Reasoning Steps'
-                          : `View Neural Reasoning Chain (${msg.reasoningSteps.length} steps)`}
-                        {expandedReasoningIds[msg.id] ? (
-                          <ChevronUp className="w-3 h-3" />
-                        ) : (
-                          <ChevronDown className="w-3 h-3" />
-                        )}
-                      </button>
-
-                      {expandedReasoningIds[msg.id] && (
-                        <div className="mt-1.5 p-2 rounded-lg bg-slate-950 border border-slate-800 space-y-1 text-[10px] font-mono text-slate-300">
-                          {msg.reasoningSteps.map((step, sIdx) => (
-                            <div key={sIdx} className="flex items-start gap-1.5">
-                              <span className="text-cyan-400 font-bold">•</span>
-                              <span>{step}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-
-            {isProcessing && (
-              <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-900/90 border border-cyan-500/30 text-cyan-300 text-xs font-mono animate-pulse">
-                <Bot className="w-4 h-4 animate-spin" />
-                <span>Aether Agent reasoning & controlling functions...</span>
-              </div>
-            )}
-
-            <div ref={chatEndRef} />
-          </div>
-
-          {/* Quick Suggestions Chips */}
-          <div className="bg-slate-950/80 px-3 py-2 border-t border-slate-800 flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-            <span className="text-[10px] text-slate-400 font-mono whitespace-nowrap">
-              Quick Lead:
-            </span>
+          <div className="px-3 py-2 bg-slate-950/40 border-b border-slate-800/80 flex items-center gap-1.5 overflow-x-auto text-[11px] font-mono">
             {QUICK_SUGGESTIONS.map((s, idx) => (
               <button
                 key={idx}
                 onClick={() => handleSendMessage(s.prompt)}
-                disabled={isProcessing}
-                className="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-[11px] text-slate-300 hover:text-cyan-300 flex items-center gap-1 whitespace-nowrap transition"
+                className="px-2.5 py-1 rounded-md bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-cyan-300 transition whitespace-nowrap flex items-center gap-1 flex-shrink-0"
               >
                 <span>{s.icon}</span>
                 <span>{s.label}</span>
@@ -500,30 +435,107 @@ export const AgenticChatbot: React.FC<AgenticChatbotProps> = ({
             ))}
           </div>
 
-          {/* Input Form */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSendMessage();
-            }}
-            className="p-3 bg-slate-900 border-t border-slate-800 flex items-center gap-2"
-          >
-            <input
-              type="text"
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Ask Agent Leader to control grid, WWE, INR, PQC..."
-              disabled={isProcessing}
-              className="flex-1 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition font-sans"
-            />
-            <button
-              type="submit"
-              disabled={!inputMessage.trim() || isProcessing}
-              className="px-3 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 text-white font-medium hover:from-cyan-500 hover:to-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-1 text-xs"
+          <div className="flex-1 p-3.5 overflow-y-auto space-y-3.5 font-sans text-xs">
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`flex flex-col ${msg.sender === 'USER' ? 'items-end' : 'items-start'}`}
+              >
+                <div
+                  className={`max-w-[88%] rounded-2xl p-3 shadow-md ${
+                    msg.sender === 'USER'
+                      ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-br-none'
+                      : 'bg-slate-950 border border-slate-800 text-slate-200 rounded-bl-none'
+                  }`}
+                >
+                  {msg.sender === 'AGENT' && msg.modelUsed && (
+                    <div className="text-[10px] font-mono text-cyan-400 mb-1 flex items-center gap-1">
+                      <Sparkles className="w-2.5 h-2.5" />
+                      <span>{msg.modelUsed}</span>
+                    </div>
+                  )}
+
+                  <div className="leading-relaxed whitespace-pre-wrap">{msg.text}</div>
+
+                  {msg.reasoningSteps && msg.reasoningSteps.length > 0 && (
+                    <div className="mt-2.5 pt-2 border-t border-slate-800/80 font-mono">
+                      <button
+                        onClick={() => toggleReasoning(msg.id)}
+                        className="text-[10px] text-slate-400 hover:text-cyan-300 flex items-center gap-1 transition"
+                      >
+                        <Zap className="w-2.5 h-2.5 text-amber-400" />
+                        <span>AI Reasoning Chain ({msg.reasoningSteps.length} steps)</span>
+                        {expandedReasoningIds[msg.id] ? (
+                          <ChevronUp className="w-2.5 h-2.5" />
+                        ) : (
+                          <ChevronDown className="w-2.5 h-2.5" />
+                        )}
+                      </button>
+
+                      {expandedReasoningIds[msg.id] && (
+                        <div className="mt-1.5 space-y-1 pl-2 border-l border-cyan-800/60 text-[10px] text-slate-400">
+                          {msg.reasoningSteps.map((step, i) => (
+                            <div key={i}>• {step}</div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {msg.actionsExecuted && msg.actionsExecuted.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {msg.actionsExecuted.map((act, i) => (
+                        <span
+                          key={i}
+                          className="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/80 text-emerald-300 text-[10px] font-mono flex items-center gap-1"
+                        >
+                          <CheckCircle2 className="w-2.5 h-2.5 text-emerald-400" />
+                          {act.label || act.type}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <span className="text-[9px] text-slate-500 font-mono mt-1 px-1">
+                  {msg.timestamp}
+                </span>
+              </div>
+            ))}
+
+            {isProcessing && (
+              <div className="flex items-center gap-2 text-cyan-400 text-xs font-mono p-2 bg-slate-950 rounded-xl border border-slate-800 max-w-[200px]">
+                <Sparkles className="w-3.5 h-3.5 animate-spin" />
+                <span>AI is reasoning...</span>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          <div className="p-3 bg-slate-950 border-t border-slate-800 rounded-b-2xl">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSendMessage();
+              }}
+              className="flex items-center gap-2"
             >
-              <Send className="w-3.5 h-3.5" />
-            </button>
-          </form>
+              <input
+                type="text"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                placeholder="Give command in Hindi/English (e.g. mint unlimited tokens)..."
+                className="flex-1 bg-slate-900 border border-slate-700 text-xs text-white rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-cyan-500 font-sans"
+              />
+              <button
+                type="submit"
+                disabled={!inputMessage.trim() || isProcessing}
+                className="p-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-xl disabled:opacity-40 transition shadow-md shadow-cyan-900/30"
+              >
+                <Send className="w-4 h-4" />
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </>

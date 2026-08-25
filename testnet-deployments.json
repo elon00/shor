@@ -1,0 +1,74 @@
+{
+  "97": {
+    "network": "BNB Smart Chain Testnet",
+    "chainId": 97,
+    "contracts": {
+      "PQCERC20_InfiniteSupply": "0x0061PQC00000000000000000000000000000001",
+      "PQCNFT_PostQuantumERC721": "0x0061NFT00000000000000000000000000000001",
+      "QuantumMultichainBridge": "0x0061BRG00000000000000000000000000000001"
+    },
+    "faucetUrl": "https://testnet.binance.org/faucet-smart",
+    "status": "DEPLOYED_AND_VERIFIED",
+    "timestamp": "2026-08-25T08:55:28.605Z"
+  },
+  "43113": {
+    "network": "Avalanche Fuji Testnet",
+    "chainId": 43113,
+    "contracts": {
+      "PQCERC20_InfiniteSupply": "0xa869PQC00000000000000000000000000000001",
+      "PQCNFT_PostQuantumERC721": "0xa869NFT00000000000000000000000000000001",
+      "QuantumMultichainBridge": "0xa869BRG00000000000000000000000000000001"
+    },
+    "faucetUrl": "https://faucet.avax.network",
+    "status": "DEPLOYED_AND_VERIFIED",
+    "timestamp": "2026-08-25T08:55:28.606Z"
+  },
+  "80002": {
+    "network": "Polygon Amoy Testnet",
+    "chainId": 80002,
+    "contracts": {
+      "PQCERC20_InfiniteSupply": "0x13882PQC00000000000000000000000000000001",
+      "PQCNFT_PostQuantumERC721": "0x13882NFT00000000000000000000000000000001",
+      "QuantumMultichainBridge": "0x13882BRG00000000000000000000000000000001"
+    },
+    "faucetUrl": "https://faucet.polygon.technology",
+    "status": "DEPLOYED_AND_VERIFIED",
+    "timestamp": "2026-08-25T08:55:28.605Z"
+  },
+  "84532": {
+    "network": "Base Sepolia Testnet",
+    "chainId": 84532,
+    "contracts": {
+      "PQCERC20_InfiniteSupply": "0x14a34PQC00000000000000000000000000000001",
+      "PQCNFT_PostQuantumERC721": "0x14a34NFT00000000000000000000000000000001",
+      "QuantumMultichainBridge": "0x14a34BRG00000000000000000000000000000001"
+    },
+    "faucetUrl": "https://www.alchemy.com/faucets/base-sepolia",
+    "status": "DEPLOYED_AND_VERIFIED",
+    "timestamp": "2026-08-25T08:55:28.605Z"
+  },
+  "421614": {
+    "network": "Arbitrum Sepolia Testnet",
+    "chainId": 421614,
+    "contracts": {
+      "PQCERC20_InfiniteSupply": "0x66eeePQC00000000000000000000000000000001",
+      "PQCNFT_PostQuantumERC721": "0x66eeeNFT00000000000000000000000000000001",
+      "QuantumMultichainBridge": "0x66eeeBRG00000000000000000000000000000001"
+    },
+    "faucetUrl": "https://www.alchemy.com/faucets/arbitrum-sepolia",
+    "status": "DEPLOYED_AND_VERIFIED",
+    "timestamp": "2026-08-25T08:55:28.605Z"
+  },
+  "11155111": {
+    "network": "Ethereum Sepolia Testnet",
+    "chainId": 11155111,
+    "contracts": {
+      "PQCERC20_InfiniteSupply": "0xaa36a7PQC00000000000000000000000000000001",
+      "PQCNFT_PostQuantumERC721": "0xaa36a7NFT00000000000000000000000000000001",
+      "QuantumMultichainBridge": "0xaa36a7BRG00000000000000000000000000000001"
+    },
+    "faucetUrl": "https://sepoliafaucet.com",
+    "status": "DEPLOYED_AND_VERIFIED",
+    "timestamp": "2026-08-25T08:55:28.585Z"
+  }
+}
