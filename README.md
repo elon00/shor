@@ -13,7 +13,6 @@
 **Shor** is an enterprise-grade Web 4.0 decentralized ecosystem combining **Conway AI Cellular Automata**, **NIST Post-Quantum Cryptography (FIPS 203 ML-KEM-768 / FIPS 204 ML-DSA-65)**, **Autonomous Multi-Model AI Swarm Intelligence**, **Unlimited Supply Tokenomics ($PQC)**, and an **Autonomous Protocol State Synchronizer** deployed across **6 EVM Testnets and 9 Multichain Networks**.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/elon00/shor)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Felon00%2Fshor)
 
 
 [Explore Live Demo](http://localhost:3000) • [GitHub Repository](https://github.com/elon00/shor) • [Testnet Registry](testnet-deployments.json) • [Architecture Whitepaper](DEPLOYMENT_MULTICHAIN.md)
