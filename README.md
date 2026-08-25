@@ -15,7 +15,6 @@
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/elon00/shor)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Felon00%2Fshor)
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2Felon00%2Fshor&envs=GEMINI_API_KEY%2CPORT&optionalEnvs=GEMINI_API_KEY&PORTDesc=Port+for+server&GEMINI_API_KEYDesc=Google+Gemini+AI+API+Key)
 
 [Explore Live Demo](http://localhost:3000) • [GitHub Repository](https://github.com/elon00/shor) • [Testnet Registry](testnet-deployments.json) • [Architecture Whitepaper](DEPLOYMENT_MULTICHAIN.md)
 
