@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Web3WalletState } from '../types';
 import { SUPPORTED_CHAINS, getChainConfig, switchEvmNetwork } from '../lib/multichain';
 import { AutoMetaMaskBatchModal } from './AutoMetaMaskBatchModal';
+import { UniversalFaucetModal } from './UniversalFaucetModal';
 import {
   Wallet,
   Shield,
@@ -38,6 +39,7 @@ export const Web3WalletBar: React.FC<Web3WalletBarProps> = ({
   const [showNetworkMenu, setShowNetworkMenu] = useState(false);
   const [isMintingUnlimited, setIsMintingUnlimited] = useState(false);
   const [isBatchAutoModalOpen, setIsBatchAutoModalOpen] = useState(false);
+  const [isFaucetModalOpen, setIsFaucetModalOpen] = useState(false);
 
   const currentChain = getChainConfig(wallet.chainId || 11155111);
 
@@ -211,7 +213,7 @@ export const Web3WalletBar: React.FC<Web3WalletBarProps> = ({
 
         {/* Contract Info Modal Trigger */}
         <button
-          onClick={() => setShowContractModal(!showContractModal)}
+          onClick={() => setIsFaucetModalOpen(true)}
           className="text-slate-300 hover:text-cyan-400 text-[11px] flex items-center gap-1 transition bg-slate-950 px-2.5 py-1 rounded-md border border-slate-800"
         >
           <Shield className="w-3 h-3 text-cyan-400" />
@@ -300,6 +302,14 @@ export const Web3WalletBar: React.FC<Web3WalletBarProps> = ({
           </button>
         )}
       </div>
+
+      <UniversalFaucetModal
+        isOpen={isFaucetModalOpen}
+        onClose={() => setIsFaucetModalOpen(false)}
+        wallet={wallet}
+        setWallet={setWallet}
+        onAddTerminalMessage={onAddTerminalMessage}
+      />
 
       <AutoMetaMaskBatchModal
         isOpen={isBatchAutoModalOpen}
