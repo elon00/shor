@@ -266,6 +266,9 @@ export const AgenticChatbot: React.FC<AgenticChatbotProps> = ({
       if (lower.includes('bridge') || lower.includes('cross chain')) {
         actions.push({ type: 'OPEN_BRIDGE', label: '🌉 Open Multichain Bridge' });
       }
+            if (lower.includes('aladdin') || lower.includes('portfolio') || lower.includes('optimize') || lower.includes('qubo') || lower.includes('qaoa') || lower.includes('stress test')) {
+        actions.push({ type: 'NAVIGATE_TAB', params: { tab: 'ALADDIN_HQPO' }, label: '🧠 Switch to Quantum Aladdin HQPO Hub' });
+      }
       if (lower.includes('market') || lower.includes('marketing') || lower.includes('viral')) {
         actions.push({ type: 'NAVIGATE_TAB', params: { tab: 'MARKETING' }, label: '🚀 Switch to Global Marketing Hub' });
       }

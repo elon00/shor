@@ -18,6 +18,7 @@ import { WweMetaverseArena } from './components/WweMetaverseArena';
 import { AgenticChatbot } from './components/AgenticChatbot';
 import { MarketingStrategyHub } from './components/MarketingStrategyHub';
 import { ShorSyncDashboard } from './components/ShorSyncDashboard';
+import { QuantumAladdinHub } from './components/QuantumAladdinHub';
 import {
   Cpu,
   ShieldCheck,
@@ -55,7 +56,7 @@ export default function App() {
   const [generation, setGeneration] = useState(0);
   const [selectedCell, setSelectedCell] = useState<CellData | null>(null);
   const [hoveredCell, setHoveredCell] = useState<CellData | null>(null);
-  const [activeTab, setActiveTab] = useState<'GRID' | 'SYNC' | 'MARKETING' | 'NFT_MARKET' | 'INR_EXCHANGE' | 'WWE_METAVERSE' | 'PQC' | 'TERMINAL' | 'ANALYTICS'>('GRID');
+  const [activeTab, setActiveTab] = useState<'GRID' | 'ALADDIN_HQPO' | 'SYNC' | 'MARKETING' | 'NFT_MARKET' | 'INR_EXCHANGE' | 'WWE_METAVERSE' | 'PQC' | 'TERMINAL' | 'ANALYTICS'>('GRID');
   const [isBridgeOpen, setIsBridgeOpen] = useState(false);
 
   // Global State Synchronizer
@@ -369,6 +370,18 @@ export default function App() {
             Grid Automaton
           </button>
 
+                    <button
+            onClick={() => setActiveTab('ALADDIN_HQPO')}
+            className={`px-3 py-1.5 rounded-lg font-mono text-xs font-semibold flex items-center gap-1.5 transition ${
+              activeTab === 'ALADDIN_HQPO'
+                ? 'bg-gradient-to-r from-cyan-600 to-indigo-600 text-white shadow-md shadow-cyan-900/30'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+            }`}
+          >
+            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+            <span>ALADDIN HQPO</span>
+          </button>
+
           <button
             onClick={() => setActiveTab('SYNC')}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
@@ -504,6 +517,14 @@ export default function App() {
               </div>
             </div>
           </div>
+        )}
+
+                {activeTab === 'ALADDIN_HQPO' && (
+          <QuantumAladdinHub
+            wallet={wallet}
+            setWallet={setWallet}
+            onAddTerminalMessage={addTerminalMessage}
+          />
         )}
 
         {activeTab === 'SYNC' && (
