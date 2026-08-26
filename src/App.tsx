@@ -357,37 +357,37 @@ export default function App() {
           </div>
         </div>
 
-        <nav className="flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800/80 overflow-x-auto max-w-full">
+                <nav className="flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-xl border border-slate-800/80 overflow-x-auto max-w-full shadow-inner">
           <button
-            onClick={() => setActiveTab('GRID')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('GRID'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'GRID'
-                ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md shadow-cyan-900/30'
+                ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-900/40 ring-1 ring-cyan-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <Layers className="w-3.5 h-3.5" />
+            <Layers className="w-3.5 h-3.5 text-cyan-400" />
             Grid Automaton
           </button>
 
-                              <button
-            onClick={() => setActiveTab('ALADDIN_HQPO')}
-            className={`px-3 py-1.5 rounded-lg font-mono text-xs font-bold flex items-center gap-1.5 transition ${
+          <button
+            onClick={() => { audioSynth.playKeyExchange(); setActiveTab('ALADDIN_HQPO'); }}
+            className={`px-3 py-1.5 rounded-lg font-mono text-xs font-bold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'ALADDIN_HQPO'
-                ? 'bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white shadow-lg shadow-cyan-500/30 ring-2 ring-cyan-400'
-                : 'bg-indigo-950/60 border border-indigo-500/40 text-cyan-300 hover:text-white hover:bg-indigo-900/80 shadow-sm'
+                ? 'bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 text-white shadow-lg shadow-cyan-500/40 ring-2 ring-cyan-400'
+                : 'bg-indigo-950/70 border border-indigo-500/50 text-cyan-300 hover:text-white hover:bg-indigo-900/90 shadow-sm'
             }`}
           >
             <Cpu className="w-4 h-4 text-cyan-300 animate-pulse" />
             <span>ALADDIN HQPO</span>
-            <span className="px-1.5 py-0.2 text-[8px] bg-cyan-400 text-slate-950 font-black rounded-full uppercase">NEW</span>
+            <span className="px-1.5 py-0.2 text-[8px] bg-cyan-400 text-slate-950 font-black rounded-full uppercase">LIVE</span>
           </button>
 
           <button
-            onClick={() => setActiveTab('SYNC')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('SYNC'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'SYNC'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
+                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/40 ring-1 ring-emerald-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
@@ -396,90 +396,128 @@ export default function App() {
           </button>
 
           <button
-            onClick={() => setActiveTab('MARKETING')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('MARKETING'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'MARKETING'
-                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-900/30'
+                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-900/40 ring-1 ring-purple-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <Megaphone className="w-3.5 h-3.5" />
+            <Megaphone className="w-3.5 h-3.5 text-purple-400" />
             Growth & Marketing
           </button>
 
           <button
-            onClick={() => setActiveTab('NFT_MARKET')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('NFT_MARKET'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'NFT_MARKET'
-                ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-md shadow-pink-900/30'
+                ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-md shadow-pink-900/40 ring-1 ring-pink-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <ShoppingBag className="w-3.5 h-3.5" />
+            <ShoppingBag className="w-3.5 h-3.5 text-pink-400" />
             NFT Marketplace
           </button>
 
           <button
-            onClick={() => setActiveTab('INR_EXCHANGE')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('INR_EXCHANGE'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'INR_EXCHANGE'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/30'
+                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/40 ring-1 ring-emerald-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <IndianRupee className="w-3.5 h-3.5" />
+            <IndianRupee className="w-3.5 h-3.5 text-emerald-400" />
             INR / UPI Exchange
           </button>
 
           <button
-            onClick={() => setActiveTab('WWE_METAVERSE')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('WWE_METAVERSE'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'WWE_METAVERSE'
-                ? 'bg-gradient-to-r from-amber-600 to-red-600 text-white shadow-md shadow-amber-900/30'
+                ? 'bg-gradient-to-r from-amber-600 to-red-600 text-white shadow-md shadow-amber-900/40 ring-1 ring-amber-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <Swords className="w-3.5 h-3.5" />
+            <Swords className="w-3.5 h-3.5 text-amber-400" />
             WWE Fight Arena
           </button>
 
           <button
-            onClick={() => setActiveTab('PQC')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('PQC'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'PQC'
-                ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-md shadow-indigo-900/30'
+                ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-md shadow-indigo-900/40 ring-1 ring-indigo-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <ShieldCheck className="w-3.5 h-3.5" />
+            <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
             PQC Hub
           </button>
 
           <button
-            onClick={() => setActiveTab('TERMINAL')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('TERMINAL'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'TERMINAL'
-                ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-md'
+                ? 'bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-md ring-1 ring-slate-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <TerminalIcon className="w-3.5 h-3.5" />
+            <TerminalIcon className="w-3.5 h-3.5 text-slate-300" />
             Terminal
           </button>
 
           <button
-            onClick={() => setActiveTab('ANALYTICS')}
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition ${
+            onClick={() => { audioSynth.playTick(); setActiveTab('ANALYTICS'); }}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition transform hover:scale-[1.02] ${
               activeTab === 'ANALYTICS'
-                ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-md'
+                ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-md ring-1 ring-blue-400'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
             }`}
           >
-            <BarChart3 className="w-3.5 h-3.5" />
+            <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
             Analytics
           </button>
         </nav>
       </header>
+
+      {/* Interactive Cyberpunk Live Ticker Ribbon */}
+      <div className="bg-slate-950/90 border-b border-slate-800/80 px-4 py-1.5 flex items-center justify-between text-[11px] font-mono text-slate-400 overflow-x-auto no-scrollbar gap-4">
+        <div className="flex items-center gap-3 whitespace-nowrap">
+          <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+            <span>12 EVM Chains Active</span>
+          </span>
+          <span className="text-slate-600">|</span>
+          <span className="text-emerald-400 flex items-center gap-1">
+            <span>⚡ Monad (10k TPS)</span>
+          </span>
+          <span className="text-purple-400 flex items-center gap-1">
+            <span>🔮 Somnia Metaverse</span>
+          </span>
+          <span className="text-blue-400 flex items-center gap-1">
+            <span>🧠 Gensyn AI Compute</span>
+          </span>
+          <span className="text-amber-400 flex items-center gap-1">
+            <span>⟠ Sepolia Testnet</span>
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3 whitespace-nowrap">
+          <span className="text-purple-300 font-bold flex items-center gap-1">
+            <ShieldCheck className="w-3 h-3 text-purple-400" />
+            <span>NIST FIPS 203 ML-KEM-768</span>
+          </span>
+          <span className="text-slate-600">|</span>
+          <button
+            onClick={() => { audioSynth.playKeyExchange(); setActiveTab('ALADDIN_HQPO'); }}
+            className="text-cyan-300 hover:text-white flex items-center gap-1 hover:underline font-bold"
+          >
+            <span>🧠 Open Quantum Aladdin Optimizer ›</span>
+          </button>
+        </div>
+      </div>
+
 
       <main className="flex-1 p-4 max-w-7xl mx-auto w-full space-y-4">
         {activeTab === 'GRID' && (
