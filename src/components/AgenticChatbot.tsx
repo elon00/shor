@@ -1,3 +1,4 @@
+import { GoogleGenAI } from '@google/genai';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Bot,
