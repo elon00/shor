@@ -1,3 +1,4 @@
+import fs from 'fs';
 import express from 'express';
 import path from 'path';
 import { GoogleGenAI } from '@google/genai';
@@ -188,19 +189,30 @@ Wallet Balance: ${wallet?.ethBalance} ETH, ${wallet?.pqcTokenBalance} $PQC, ₹$
 });
 
 async function startServer() {
-  if (process.env.NODE_ENV !== 'production') {
+  const distPath = path.join(currentDir, 'dist');
+  const hasDist = fs.existsSync(path.join(distPath, 'index.html'));
+
+  if (process.env.NODE_ENV === 'production' || hasDist) {
+    app.use(express.static(distPath, {
+      maxAge: 0,
+      etag: false,
+      setHeaders: (res) => {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      },
+    }));
+    app.get('*', (req, res) => {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  } else {
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
     });
     app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(currentDir, 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
   }
 
   app.listen(PORT, '0.0.0.0', () => {
