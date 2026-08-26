@@ -35,6 +35,7 @@ import {
   TrendingUp,
   Megaphone,
   RefreshCw,
+  Zap,
 } from 'lucide-react';
 
 const GRID_WIDTH = 36;
@@ -522,6 +523,36 @@ export default function App() {
       <main className="flex-1 p-4 max-w-7xl mx-auto w-full space-y-4">
         {activeTab === 'GRID' && (
           <div className="space-y-4">
+            {/* Quantum Aladdin Quick Launch Callout */}
+            <div className="bg-gradient-to-r from-cyan-950/80 via-indigo-950/80 to-purple-950/80 border border-cyan-500/50 rounded-2xl p-4 shadow-2xl flex flex-wrap items-center justify-between gap-3 relative overflow-hidden">
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/30 ring-1 ring-cyan-400">
+                  <Cpu className="w-5 h-5 animate-pulse" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-extrabold text-white font-mono">Quantum Aladdin OS • HQPO Multi-Solver Active</h3>
+                    <span className="px-2 py-0.5 rounded-full bg-cyan-400 text-slate-950 text-[9px] font-mono font-black uppercase tracking-wider">
+                      NEW MILESTONE
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-300">
+                    BlackRock Aladdin-grade Risk Models + QUBO / QAOA Quantum Multi-Qubit Optimization Engine.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 relative z-10">
+                <button
+                  onClick={() => { audioSynth.playKeyExchange(); setActiveTab('ALADDIN_HQPO'); }}
+                  className="px-4 py-2 bg-gradient-to-r from-cyan-500 via-indigo-600 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-white rounded-xl text-xs font-bold font-mono flex items-center gap-2 shadow-lg shadow-cyan-900/50 transition transform hover:scale-105"
+                >
+                  <Zap className="w-4 h-4 fill-current" />
+                  <span>Launch Quantum Aladdin Hub ›</span>
+                </button>
+              </div>
+            </div>
+
             <ControlBar
               isRunning={isRunning}
               setIsRunning={setIsRunning}
