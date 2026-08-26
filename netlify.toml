@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run build:client"
   publish = "dist"
 
 [build.environment]
@@ -14,6 +14,9 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
