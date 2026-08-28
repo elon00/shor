@@ -1,101 +1,16 @@
 {
-  "1": {
-    "chainName": "Ethereum Mainnet",
-    "chainId": 1,
-    "contracts": {
-      "PQCERC20": "0x0001PQC0000000000000000000000000000001",
-      "PQCNFT": "0x0001NFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x0001BRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.766Z"
-  },
-  "10": {
-    "chainName": "Optimism (OP)",
-    "chainId": 10,
-    "contracts": {
-      "PQCERC20": "0x000aPQC0000000000000000000000000000001",
-      "PQCNFT": "0x000aNFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x000aBRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.770Z"
-  },
-  "56": {
-    "chainName": "BNB Smart Chain",
-    "chainId": 56,
-    "contracts": {
-      "PQCERC20": "0x0038PQC0000000000000000000000000000001",
-      "PQCNFT": "0x0038NFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x0038BRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.770Z"
-  },
-  "137": {
-    "chainName": "Polygon PoS",
-    "chainId": 137,
-    "contracts": {
-      "PQCERC20": "0x0089PQC0000000000000000000000000000001",
-      "PQCNFT": "0x0089NFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x0089BRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.769Z"
-  },
-  "8453": {
-    "chainName": "Base Mainnet",
-    "chainId": 8453,
-    "contracts": {
-      "PQCERC20": "0x2105PQC0000000000000000000000000000001",
-      "PQCNFT": "0x2105NFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x2105BRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.769Z"
-  },
-  "42161": {
-    "chainName": "Arbitrum One",
-    "chainId": 42161,
-    "contracts": {
-      "PQCERC20": "0xa4b1PQC0000000000000000000000000000001",
-      "PQCNFT": "0xa4b1NFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0xa4b1BRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.769Z"
-  },
-  "43114": {
-    "chainName": "Avalanche C-Chain",
-    "chainId": 43114,
-    "contracts": {
-      "PQCERC20": "0xa86aPQC0000000000000000000000000000001",
-      "PQCNFT": "0xa86aNFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0xa86aBRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.771Z"
+  "11155111": {
+    "chainName": "Sepolia Testnet",
+    "chainId": 11155111,
+    "rpcEnv": "RPC_SEPOLIA",
+    "contracts": {},
+    "status": "NOT_DEPLOYED_VERIFIED"
   },
   "80002": {
     "chainName": "Polygon Amoy Testnet",
     "chainId": 80002,
-    "contracts": {
-      "PQCERC20": "0x13882PQC0000000000000000000000000000001",
-      "PQCNFT": "0x13882NFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0x13882BRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.772Z"
-  },
-  "11155111": {
-    "chainName": "Sepolia Testnet",
-    "chainId": 11155111,
-    "contracts": {
-      "PQCERC20": "0xaa36a7PQC0000000000000000000000000000001",
-      "PQCNFT": "0xaa36a7NFT0000000000000000000000000000001",
-      "QuantumMultichainBridge": "0xaa36a7BRG0000000000000000000000000000001"
-    },
-    "status": "DEPLOYED_AND_VERIFIED",
-    "timestamp": "2026-08-25T09:03:01.772Z"
+    "rpcEnv": "RPC_AMOY",
+    "contracts": {},
+    "status": "NOT_DEPLOYED_VERIFIED"
   }
 }
