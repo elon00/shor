@@ -11,8 +11,7 @@ interface IPQCERC20 {
  * @title QuantumMultichainBridge
  * @notice EVM bridge escrow with explicit, replay-protected relay authorization.
  * @dev The relay signature is classical ECDSA. It is NOT post-quantum secure.
- * A production PQC relay can replace this authorization layer once an audited
- * on-chain/verifier primitive is available for the chosen PQ signature scheme.
+ * A future audited PQ verifier can replace this authorization layer.
  */
 contract QuantumMultichainBridge {
     address public owner;
@@ -20,6 +19,8 @@ contract QuantumMultichainBridge {
     IPQCERC20 public immutable pqcToken;
     uint256 public immutable currentChainId;
     uint256 public nextNonce;
+
+    uint256 private constant SECP256K1N_HALF = 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5D576E7357A4501DDFE92F46681B20A0;
 
     struct BridgeTransaction {
         bytes32 txId;
@@ -99,7 +100,7 @@ contract QuantumMultichainBridge {
         txId = keccak256(abi.encode(address(this), msg.sender, recipient, amount, currentChainId, targetChainId, nonce, pqcProofHash));
         require(!processedTxIds[txId], "Transaction already exists");
 
-        // User must explicitly approve this bridge before tokens can move.
+        // Explicit user approval is required; the bridge cannot seize arbitrary balances.
         require(pqcToken.transferFrom(msg.sender, address(this), amount), "Token transfer failed");
         require(pqcToken.bridgeBurn(address(this), amount, targetChainId), "Token burn failed");
 
@@ -119,29 +120,31 @@ contract QuantumMultichainBridge {
         emit BridgeInitiated(txId, msg.sender, recipient, amount, currentChainId, targetChainId, pqcProofHash, nonce);
     }
 
-    function completeBridge(bytes32 txId, address recipient, uint256 amount, uint256 sourceChainId, uint256 targetChainId, uint256 nonce, bytes32 pqcProofHash, bytes calldata relaySignature) external returns (bool) {
+    function completeBridge(
+        bytes32 txId,
+        address recipient,
+        uint256 amount,
+        uint256 sourceChainId,
+        uint256 targetChainId,
+        uint256 nonce,
+        bytes32 pqcProofHash,
+        bytes calldata relaySignature
+    ) external returns (bool) {
         require(!processedTxIds[txId], "Bridge transaction already processed");
         require(targetChainId == currentChainId, "Wrong destination chain");
         require(supportedChains[sourceChainId], "Source chain not supported");
         require(recipient != address(0) && amount > 0, "Invalid transfer");
+        require(pqcProofHash != bytes32(0), "PQC proof required");
 
         bytes32 digest = keccak256(abi.encode(address(this), txId, recipient, amount, sourceChainId, targetChainId, nonce, pqcProofHash));
-        require(_recoverSigner(_toEthSignedMessageHash(digest), relaySignature) == relaySigner, "Invalid relay signature");
-
-        bytes32 expectedTxId = keccak256(abi.encode(bridgeAddressForVerification(), bridgeSenderFromTx(txId), recipient, amount, sourceChainId, targetChainId, nonce, pqcProofHash));
-        // txId is independently bound to the destination authorization below.
-        // The signed digest is the canonical authorization; txId uniqueness prevents replay.
-        expectedTxId;
+        address signer = _recoverSigner(_toEthSignedMessageHash(digest), relaySignature);
+        require(signer == relaySigner, "Invalid relay signature");
 
         processedTxIds[txId] = true;
         require(pqcToken.bridgeMint(recipient, amount, sourceChainId), "Token mint failed");
         emit BridgeCompleted(txId, recipient, amount, sourceChainId);
         return true;
     }
-
-    // Kept as explicit helpers so the signed message format is deterministic.
-    function bridgeAddressForVerification() internal view returns (address) { return address(this); }
-    function bridgeSenderFromTx(bytes32) internal pure returns (address) { return address(0); }
 
     function _toEthSignedMessageHash(bytes32 digest) internal pure returns (bytes32) {
         return keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", digest));
@@ -157,6 +160,7 @@ contract QuantumMultichainBridge {
             s := calldataload(add(signature.offset, 32))
             v := byte(0, calldataload(add(signature.offset, 64)))
         }
+        require(uint256(s) <= SECP256K1N_HALF, "High-s signature rejected");
         if (v < 27) v += 27;
         require(v == 27 || v == 28, "Invalid signature v");
         return ecrecover(digest, v, r, s);
