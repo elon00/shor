@@ -11,4 +11,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: node scripts/pqc-kat-reality-gate.cjs
+      - name: Install PQC dependency tree
+        run: npm install --package-lock=false --no-audit --no-fund
+      - name: Execute real PQC tests
+        run: npm run test:pqc
+      - name: Run PQC reality gate
+        run: node scripts/pqc-kat-reality-gate.cjs
