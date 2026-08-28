@@ -10,10 +10,12 @@
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test:pqc": "node tests/pqc-smoke.mjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
+    "@noble/post-quantum": "0.7.0",
     "@tailwindcss/vite": "^4.1.14",
     "@types/express": "^4.17.21",
     "@types/node": "^22.14.0",
