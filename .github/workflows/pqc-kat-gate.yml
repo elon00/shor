@@ -1,0 +1,14 @@
+name: PQC KAT Reality Gate
+on:
+  push:
+    branches: [god-mode-production-hardening]
+  pull_request:
+jobs:
+  pqc-kat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/pqc-kat-reality-gate.cjs
