@@ -1,0 +1,25 @@
+name: Real On-Chain Deployment Gate
+on:
+  pull_request:
+  push:
+    branches: [god-mode-production-hardening]
+jobs:
+  verify-real-chain-state:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Verify bytecode on configured RPCs
+        env:
+          RPC_ETHEREUM_MAINNET: ${{ secrets.RPC_ETHEREUM_MAINNET }}
+          RPC_POLYGON_POS: ${{ secrets.RPC_POLYGON_POS }}
+          RPC_ARBITRUM_ONE: ${{ secrets.RPC_ARBITRUM_ONE }}
+          RPC_BASE_MAINNET: ${{ secrets.RPC_BASE_MAINNET }}
+          RPC_OPTIMISM: ${{ secrets.RPC_OPTIMISM }}
+          RPC_BNB_SMART_CHAIN: ${{ secrets.RPC_BNB_SMART_CHAIN }}
+          RPC_AVALANCHE_C_CHAIN: ${{ secrets.RPC_AVALANCHE_C_CHAIN }}
+        run: node scripts/verify-real-deployment.cjs
