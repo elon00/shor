@@ -16,9 +16,12 @@ jobs:
         with:
           node-version: '20'
           cache: npm
-      - run: npm ci
+      - name: Install dependencies
+        run: npm install --package-lock=false
       - name: TypeScript typecheck
         run: npm run lint
+      - name: PQC smoke test
+        run: npm run test:pqc
       - name: Frontend and server build
         run: npm run build
       - name: Dependency audit
