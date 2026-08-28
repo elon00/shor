@@ -26,8 +26,8 @@ async function main() {
     const rpc = d.rpcUrl ||
       process.env[envName] ||
       (d.rpcEnv && process.env[d.rpcEnv]) ||
-      (network === '80002' ? (process.env.AMOY_RPC_URL || process.env.POLYGON_AMOY_RPC_URL || process.env.RPC_AMOY) : null) ||
-      (network === '11155111' ? (process.env.SEPOLIA_RPC_URL || process.env.RPC_SEPOLIA) : null);
+      (network === '80002' ? (process.env.AMOY_RPC_URL || process.env.POLYGON_AMOY_RPC_URL || process.env.RPC_AMOY || process.env.RPC_POLYGON_POS) : null) ||
+      (network === '11155111' ? (process.env.SEPOLIA_RPC_URL || process.env.RPC_SEPOLIA || process.env.RPC_ETHEREUM_MAINNET) : null);
     const contracts = d.contracts || {};
     if (!rpc) { console.log(`SKIP ${network}: no RPC configured`); continue; }
     configured++;

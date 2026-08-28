@@ -20,8 +20,8 @@ jobs:
           SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
           RPC_AMOY: ${{ secrets.RPC_AMOY || secrets.AMOY_RPC_URL || secrets.POLYGON_AMOY_RPC_URL }}
           RPC_SEPOLIA: ${{ secrets.RPC_SEPOLIA || secrets.SEPOLIA_RPC_URL }}
-          RPC_ETHEREUM_MAINNET: ${{ secrets.RPC_ETHEREUM_MAINNET }}
-          RPC_POLYGON_POS: ${{ secrets.RPC_POLYGON_POS }}
+          RPC_ETHEREUM_MAINNET: ${{ secrets.SEPOLIA_RPC_URL || secrets.RPC_ETHEREUM_MAINNET }}
+          RPC_POLYGON_POS: ${{ secrets.AMOY_RPC_URL || secrets.POLYGON_AMOY_RPC_URL || secrets.RPC_POLYGON_POS }}
           RPC_ARBITRUM_ONE: ${{ secrets.RPC_ARBITRUM_ONE }}
           RPC_BASE_MAINNET: ${{ secrets.RPC_BASE_MAINNET }}
           RPC_OPTIMISM: ${{ secrets.RPC_OPTIMISM }}
