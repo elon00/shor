@@ -2,12 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, god-mode-production-hardening ]
   pull_request:
     branches: [ master ]
 
 jobs:
-  build:
+  build-and-security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,6 +15,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
       - run: npm ci
-      - run: npm run lint
-      - run: npm run build
+      - name: TypeScript typecheck
+        run: npm run lint
+      - name: Frontend and server build
+        run: npm run build
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+      - name: Compile Solidity contracts
+        run: npx --yes solc@0.8.20 --base-path . --include-path node_modules --bin contracts/PQCERC20.sol contracts/QuantumMultichainBridge.sol
