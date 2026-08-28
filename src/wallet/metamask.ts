@@ -1,16 +1,18 @@
 ﻿import { ethers } from "ethers";
 import { SHOR_TESTNETS, SHOR_NETWORK_POLICY } from "../config/testnets";
 
-function requireMetaMask() {
+function requireMetaMask(): void {
   if (!window.ethereum) {
     throw new Error("MetaMask is not installed.");
   }
 }
 
-export async function connectMetaMask() {
+export async function connectMetaMask(): Promise<string> {
   requireMetaMask();
 
-  const accounts = await window.ethereum.request({ method: "eth_requestAccounts" }) as string[];
+  const accounts = (await window.ethereum.request({
+    method: "eth_requestAccounts"
+  })) as string[];
 
   if (!accounts || accounts.length === 0) {
     throw new Error("No MetaMask account selected.");
@@ -19,7 +21,9 @@ export async function connectMetaMask() {
   return accounts[0];
 }
 
-export async function switchToTestnet(networkKey) {
+export async function switchToTestnet(
+  networkKey: string
+) {
   requireMetaMask();
 
   if (!SHOR_NETWORK_POLICY.testnetsOnly) {
@@ -32,45 +36,52 @@ export async function switchToTestnet(networkKey) {
     throw new Error(`Unknown SHOR testnet: ${networkKey}`);
   }
 
-  const chainIdHex = "0x" + network.chainId.toString(16);
+  const chainIdHex = `0x${network.chainId.toString(16)}`;
 
   try {
     await window.ethereum.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: chainIdHex }]
     });
-  } catch (error) {
-    if (error?.code !== 4902) {
+  } catch (error: unknown) {
+    const code =
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error
+        ? (error as { code?: number }).code
+        : undefined;
+
+    if (code !== 4902) {
       throw error;
     }
 
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
-      params: [{
-        chainId: chainIdHex,
-        chainName: network.name,
-        nativeCurrency: {
-          name: network.nativeSymbol,
-          symbol: network.nativeSymbol,
-          decimals: 18
-        },
-        rpcUrls: [network.rpc],
-        blockExplorerUrls: network.explorer
-          ? [network.explorer]
-          : []
-      }]
+      params: [
+        {
+          chainId: chainIdHex,
+          chainName: network.name,
+          nativeCurrency: {
+            name: network.nativeSymbol,
+            symbol: network.nativeSymbol,
+            decimals: 18
+          },
+          rpcUrls: [network.rpc],
+          blockExplorerUrls: network.explorer
+            ? [network.explorer]
+            : []
+        }
+      ]
     });
   }
 
   return network;
 }
 
-export async function getConnectedWallet(networkKey) {
+export async function getConnectedWallet(networkKey: string) {
   const address = await connectMetaMask();
 
-  await switchToTestnet(networkKey);
-
-  const network = SHOR_TESTNETS[networkKey];
+  const network = await switchToTestnet(networkKey);
 
   const provider = new ethers.BrowserProvider(window.ethereum);
   const actualNetwork = await provider.getNetwork();
@@ -95,4 +106,3 @@ export async function getConnectedWallet(networkKey) {
 export function getSupportedTestnets() {
   return Object.values(SHOR_TESTNETS);
 }
-
