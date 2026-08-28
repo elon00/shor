@@ -2,9 +2,9 @@ name: Build & Testnet Deploy Workflow
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, god-mode-production-hardening ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, god-mode-production-hardening ]
 
 jobs:
   build-and-test:
@@ -20,8 +20,13 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install Dependencies
-        run: npm ci
+      # package-lock.json predates @noble/post-quantum. npm ci therefore fails
+      # before the PQC tests can run. Regenerate/install from package.json in CI.
+      - name: Install Dependencies (repair lock mismatch)
+        run: npm install --no-audit --no-fund
+
+      - name: Run PQC Reality Test
+        run: npm run test:pqc
 
       - name: Run Type Check & Lint
         run: npm run lint
