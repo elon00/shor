@@ -15,6 +15,11 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Verify bytecode on configured RPCs
         env:
+          AMOY_RPC_URL: ${{ secrets.AMOY_RPC_URL || secrets.POLYGON_AMOY_RPC_URL }}
+          POLYGON_AMOY_RPC_URL: ${{ secrets.POLYGON_AMOY_RPC_URL || secrets.AMOY_RPC_URL }}
+          SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+          RPC_AMOY: ${{ secrets.RPC_AMOY || secrets.AMOY_RPC_URL || secrets.POLYGON_AMOY_RPC_URL }}
+          RPC_SEPOLIA: ${{ secrets.RPC_SEPOLIA || secrets.SEPOLIA_RPC_URL }}
           RPC_ETHEREUM_MAINNET: ${{ secrets.RPC_ETHEREUM_MAINNET }}
           RPC_POLYGON_POS: ${{ secrets.RPC_POLYGON_POS }}
           RPC_ARBITRUM_ONE: ${{ secrets.RPC_ARBITRUM_ONE }}

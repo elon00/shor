@@ -1,0 +1,7 @@
+{
+  "source": true,
+  "realRpcVerifier": true,
+  "pqcGate": true,
+  "deploymentEvidence": true,
+  "status": "RELEASE_CANDIDATE"
+}

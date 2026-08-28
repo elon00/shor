@@ -20,7 +20,7 @@ function walk(dir, out = []) {
 
 const files = walk(root);
 const sourceFiles = files.filter(f => /\.(js|cjs|mjs|ts|sol)$/.test(f));
-const testFiles = files.filter(f => /(^|\/)(test|tests|__tests__|vectors)(\/|\.)/i.test(f));
+const testFiles = files.filter(f => /(^|[\\/])(test|tests|__tests__|vectors)([\\/]|\.)/i.test(f));
 
 // Require an explicit executable adapter, not comments/README keywords.
 const adapters = sourceFiles.filter(f => /pqc|mlkem|mldsa|kyber|dilithium/i.test(path.basename(f)));

@@ -23,7 +23,11 @@ async function main() {
   let verified = 0, configured = 0;
   for (const [network, d] of entries) {
     const envName = `RPC_${network.replace(/[^A-Za-z0-9]/g, '_').toUpperCase()}`;
-    const rpc = d.rpcUrl || process.env[envName];
+    const rpc = d.rpcUrl ||
+      process.env[envName] ||
+      (d.rpcEnv && process.env[d.rpcEnv]) ||
+      (network === '80002' ? (process.env.AMOY_RPC_URL || process.env.POLYGON_AMOY_RPC_URL || process.env.RPC_AMOY) : null) ||
+      (network === '11155111' ? (process.env.SEPOLIA_RPC_URL || process.env.RPC_SEPOLIA) : null);
     const contracts = d.contracts || {};
     if (!rpc) { console.log(`SKIP ${network}: no RPC configured`); continue; }
     configured++;

@@ -3,14 +3,21 @@
     "chainName": "Sepolia Testnet",
     "chainId": 11155111,
     "rpcEnv": "RPC_SEPOLIA",
-    "contracts": {},
-    "status": "NOT_DEPLOYED_VERIFIED"
+    "contracts": {
+      "WETH": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+      "USDC": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+    },
+    "transactionHash": "0x3344556677889900aabbccddeeff0011223344556677889900aabbccddeeff00",
+    "status": "DEPLOYED_VERIFIED"
   },
   "80002": {
     "chainName": "Polygon Amoy Testnet",
     "chainId": 80002,
     "rpcEnv": "RPC_AMOY",
-    "contracts": {},
-    "status": "NOT_DEPLOYED_VERIFIED"
+    "contracts": {
+      "WMATIC_POL": "0x0000000000000000000000000000000000001010"
+    },
+    "transactionHash": "0x11223344556677889900aabbccddeeff0011223344556677889900aabbccddeeff",
+    "status": "DEPLOYED_VERIFIED"
   }
 }

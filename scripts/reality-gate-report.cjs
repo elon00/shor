@@ -12,7 +12,13 @@ const report = networks.map(([network, d]) => {
   const valid = addresses.length > 0 && addresses.every(a => /^0x[0-9a-fA-F]{40}$/.test(a));
   return {
     network,
-    rpc_configured: Boolean(d.rpcUrl || process.env[`RPC_${network.replace(/[^A-Za-z0-9]/g, '_').toUpperCase()}`]),
+    rpc_configured: Boolean(
+      d.rpcUrl ||
+      process.env[`RPC_${network.replace(/[^A-Za-z0-9]/g, '_').toUpperCase()}`] ||
+      (d.rpcEnv && process.env[d.rpcEnv]) ||
+      (network === '80002' ? (process.env.AMOY_RPC_URL || process.env.POLYGON_AMOY_RPC_URL || process.env.RPC_AMOY) : null) ||
+      (network === '11155111' ? (process.env.SEPOLIA_RPC_URL || process.env.RPC_SEPOLIA) : null)
+    ),
     contract_count: addresses.length,
     valid_addresses: valid,
     status: valid ? 'READY_FOR_ONCHAIN_VERIFICATION' : 'NOT_DEPLOYED_VERIFIED'
