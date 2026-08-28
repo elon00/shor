@@ -11,7 +11,10 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "test:pqc": "node tests/pqc-smoke.mjs"
+    "test:pqc": "node tests/pqc-smoke.mjs",
+    "compile:contracts": "hardhat compile",
+    "deploy:sepolia": "hardhat run scripts/deploy-testnet.cjs --network sepolia",
+    "deploy:amoy": "hardhat run scripts/deploy-testnet.cjs --network amoy"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -34,5 +37,10 @@
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.3"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.8",
+    "ethers": "^6.13.5",
+    "hardhat": "^2.22.19"
   }
 }
