@@ -5,20 +5,18 @@ const path = require('path');
 const TARGETS = {
   sepolia: { chainId: 11155111 },
   amoy: { chainId: 80002 },
+  baseSepolia: { chainId: 84532 },
 };
-
-function requireEnv(name) {
-  if (!process.env[name]) throw new Error(`${name} is required`);
-  return process.env[name];
-}
 
 async function deploy(networkName) {
   const expected = TARGETS[networkName];
-  if (!expected) throw new Error(`Unsupported network: ${networkName}`);
+  if (!expected) throw new Error(`Unsupported deployment network: ${networkName}`);
+
   const network = await ethers.provider.getNetwork();
   if (Number(network.chainId) !== expected.chainId) {
     throw new Error(`Wrong network: expected ${expected.chainId}, got ${network.chainId}`);
   }
+
   const [deployer] = await ethers.getSigners();
   const signerAddress = await deployer.getAddress();
   console.log(`Deploying SHOR contracts to ${networkName} from ${signerAddress}`);
@@ -67,8 +65,13 @@ async function deploy(networkName) {
 
 async function main() {
   const networkName = process.env.DEPLOY_NETWORK || process.argv[2];
-  if (!networkName) throw new Error('Usage: DEPLOY_NETWORK=sepolia npx hardhat run scripts/deploy-testnet.cjs --network sepolia');
+  if (!networkName) {
+    throw new Error('Usage: npx hardhat run scripts/deploy-testnet.cjs --network baseSepolia');
+  }
   await deploy(networkName);
 }
 
-main().catch((error) => { console.error(error); process.exit(1); });
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
