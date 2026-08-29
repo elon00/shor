@@ -1,0 +1,19 @@
+name: PQC KAT Reality Gate
+on:
+  push:
+    branches: [god-mode-production-hardening]
+  pull_request:
+jobs:
+  pqc-kat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install PQC dependency tree
+        run: npm install --package-lock=false --no-audit --no-fund
+      - name: Execute real PQC tests
+        run: npm run test:pqc
+      - name: Run PQC reality gate
+        run: node scripts/pqc-kat-reality-gate.cjs

@@ -1,0 +1,16 @@
+name: Master Reality Gate
+on:
+  push:
+    branches: [god-mode-production-hardening]
+  pull_request:
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/master-gate-report.cjs
+      - run: node scripts/master-reality-audit.cjs
+      - run: node scripts/pqc-reality-gate.cjs

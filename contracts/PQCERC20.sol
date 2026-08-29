@@ -3,16 +3,17 @@ pragma solidity ^0.8.20;
 
 /**
  * @title PQCERC20
- * @notice Post-Quantum Cryptography Enabled ERC-20 Token ($PQC)
- * Built for Shor Web 4.0 Multichain Cellular Automaton & AI Network.
- * Supports FIPS 203 ML-KEM-768 lattice state verification and cross-chain bridge minting.
+ * @notice ERC-20 token with an auditable post-quantum metadata registry.
+ * @dev FIPS algorithms are metadata only; this EVM contract does NOT perform
+ * ML-KEM/ML-DSA cryptographic verification. Off-chain PQC verification must
+ * be completed by a trusted verifier before a bridge action is authorized.
  */
 contract PQCERC20 {
-    string public name = "Post-Quantum Conway Token";
-    string public symbol = "PQC";
-    uint8 public decimals = 18;
-    uint256 public totalSupply;
+    string public constant name = "Post-Quantum Conway Token";
+    string public constant symbol = "PQC";
+    uint8 public constant decimals = 18;
 
+    uint256 public totalSupply;
     address public owner;
     address public bridgeContract;
 
@@ -21,11 +22,13 @@ contract PQCERC20 {
 
     mapping(address => uint256) public balanceOf;
     mapping(address => mapping(address => uint256)) public allowance;
-    mapping(address => string) public addressPqcPublicKey;
+    mapping(address => bytes32) public addressPqcPublicKeyHash;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-    event LatticeKeyRegistered(address indexed user, string pqcPublicKey);
+    event Approval(address indexed tokenOwner, address indexed spender, uint256 value);
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+    event BridgeUpdated(address indexed bridge);
+    event LatticeKeyRegistered(address indexed user, bytes32 indexed publicKeyHash);
     event BridgeMint(address indexed to, uint256 amount, uint256 sourceChainId);
     event BridgeBurn(address indexed from, uint256 amount, uint256 targetChainId);
     event LatticeStateUpdated(bytes32 indexed newStateHash, uint256 timestamp);
@@ -36,60 +39,66 @@ contract PQCERC20 {
     }
 
     modifier onlyBridge() {
-        require(msg.sender == bridgeContract || msg.sender == owner, "Only bridge authorized");
+        require(msg.sender == bridgeContract, "Only bridge authorized");
         _;
     }
 
     constructor(uint256 initialSupply) {
         owner = msg.sender;
-        totalSupply = initialSupply * (10 ** uint256(decimals));
+        totalSupply = initialSupply * 10 ** uint256(decimals);
         balanceOf[msg.sender] = totalSupply;
-        globalLatticeStateHash = keccak256(abi.encodePacked(block.timestamp, msg.sender, "GENESIS_LATTICE_SEED"));
+        globalLatticeStateHash = keccak256(abi.encodePacked(block.chainid, msg.sender, "GENESIS_LATTICE_SEED"));
         emit Transfer(address(0), msg.sender, totalSupply);
+        emit OwnershipTransferred(address(0), msg.sender);
     }
 
-    function setBridgeContract(address _bridge) external onlyOwner {
-        bridgeContract = _bridge;
+    function setBridgeContract(address bridge) external onlyOwner {
+        require(bridge != address(0), "Invalid bridge");
+        bridgeContract = bridge;
+        emit BridgeUpdated(bridge);
     }
 
-    function registerPqcPublicKey(string calldata publicKey) external {
-        addressPqcPublicKey[msg.sender] = publicKey;
-        emit LatticeKeyRegistered(msg.sender, publicKey);
+    function transferOwnership(address newOwner) external onlyOwner {
+        require(newOwner != address(0), "Invalid owner");
+        emit OwnershipTransferred(owner, newOwner);
+        owner = newOwner;
+    }
+
+    function registerPqcPublicKeyHash(bytes32 publicKeyHash) external {
+        require(publicKeyHash != bytes32(0), "Empty key hash");
+        addressPqcPublicKeyHash[msg.sender] = publicKeyHash;
+        emit LatticeKeyRegistered(msg.sender, publicKeyHash);
     }
 
     function updateLatticeState(bytes32 newStateHash) external onlyOwner {
+        require(newStateHash != bytes32(0), "Empty state hash");
         globalLatticeStateHash = newStateHash;
         emit LatticeStateUpdated(newStateHash, block.timestamp);
     }
 
     function transfer(address recipient, uint256 amount) external returns (bool) {
-        require(recipient != address(0), "Cannot transfer to zero address");
-        require(balanceOf[msg.sender] >= amount, "Insufficient PQC balance");
-
-        balanceOf[msg.sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(msg.sender, recipient, amount);
+        _transfer(msg.sender, recipient, amount);
         return true;
     }
 
     function approve(address spender, uint256 amount) external returns (bool) {
+        require(spender != address(0), "Invalid spender");
         allowance[msg.sender][spender] = amount;
         emit Approval(msg.sender, spender, amount);
         return true;
     }
 
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool) {
-        require(balanceOf[sender] >= amount, "Insufficient PQC balance");
-        require(allowance[sender][msg.sender] >= amount, "Allowance exceeded");
-
-        balanceOf[sender] -= amount;
-        allowance[sender][msg.sender] -= amount;
-        balanceOf[recipient] += amount;
-        emit Transfer(sender, recipient, amount);
+        uint256 currentAllowance = allowance[sender][msg.sender];
+        require(currentAllowance >= amount, "Allowance exceeded");
+        unchecked { allowance[sender][msg.sender] = currentAllowance - amount; }
+        _transfer(sender, recipient, amount);
+        emit Approval(sender, msg.sender, allowance[sender][msg.sender]);
         return true;
     }
 
     function bridgeMint(address to, uint256 amount, uint256 sourceChainId) external onlyBridge returns (bool) {
+        require(to != address(0), "Invalid recipient");
         totalSupply += amount;
         balanceOf[to] += amount;
         emit BridgeMint(to, amount, sourceChainId);
@@ -98,11 +107,22 @@ contract PQCERC20 {
     }
 
     function bridgeBurn(address from, uint256 amount, uint256 targetChainId) external onlyBridge returns (bool) {
-        require(balanceOf[from] >= amount, "Insufficient PQC balance to burn");
-        balanceOf[from] -= amount;
+        _transfer(from, address(this), amount);
+        balanceOf[address(this)] -= amount;
         totalSupply -= amount;
         emit BridgeBurn(from, amount, targetChainId);
-        emit Transfer(from, address(0), amount);
+        emit Transfer(address(this), address(0), amount);
         return true;
+    }
+
+    function _transfer(address from, address to, uint256 amount) internal {
+        require(from != address(0), "Invalid sender");
+        require(to != address(0), "Invalid recipient");
+        require(balanceOf[from] >= amount, "Insufficient PQC balance");
+        unchecked {
+            balanceOf[from] -= amount;
+            balanceOf[to] += amount;
+        }
+        emit Transfer(from, to, amount);
     }
 }

@@ -1,53 +1,77 @@
+const { ethers } = require('hardhat');
 const fs = require('fs');
 const path = require('path');
 
-const TESTNETS = [
-  { name: 'Ethereum Sepolia Testnet', chainId: 11155111, rpc: 'https://rpc.sepolia.org', faucet: 'https://sepoliafaucet.com' },
-  { name: 'Polygon Amoy Testnet', chainId: 80002, rpc: 'https://rpc-amoy.polygon.technology', faucet: 'https://faucet.polygon.technology' },
-  { name: 'Base Sepolia Testnet', chainId: 84532, rpc: 'https://sepolia.base.org', faucet: 'https://www.alchemy.com/faucets/base-sepolia' },
-  { name: 'Arbitrum Sepolia Testnet', chainId: 421614, rpc: 'https://sepolia-rollup.arbitrum.io/rpc', faucet: 'https://www.alchemy.com/faucets/arbitrum-sepolia' },
-  { name: 'BNB Smart Chain Testnet', chainId: 97, rpc: 'https://data-seed-prebsc-1-s1.binance.org:8545', faucet: 'https://testnet.binance.org/faucet-smart' },
-  { name: 'Avalanche Fuji Testnet', chainId: 43113, rpc: 'https://api.avax-test.network/ext/bc/C/rpc', faucet: 'https://faucet.avax.network' },
-];
+const TARGETS = {
+  sepolia: { chainId: 11155111 },
+  amoy: { chainId: 80002 },
+  baseSepolia: { chainId: 84532 },
+};
 
-async function main() {
-  console.log("==================================================================");
-  console.log("🧪 Shor Web 4.0: Automated Testnet Deployment Engine");
-  console.log("==================================================================");
+async function deploy(networkName) {
+  const expected = TARGETS[networkName];
+  if (!expected) throw new Error(`Unsupported deployment network: ${networkName}`);
 
-  const deployments = {};
-
-  for (const net of TESTNETS) {
-    console.log(`\n🚀 Deploying to Testnet: ${net.name} (Chain ID: ${net.chainId})...`);
-    console.log(`   RPC URL: ${net.rpc}`);
-    console.log(`   Faucet:  ${net.faucet}`);
-
-    const hexChain = net.chainId.toString(16).padStart(4, '0');
-    const pqcToken = `0x${hexChain}PQC00000000000000000000000000000001`;
-    const pqcNft = `0x${hexChain}NFT00000000000000000000000000000001`;
-    const bridge = `0x${hexChain}BRG00000000000000000000000000000001`;
-
-    deployments[net.chainId] = {
-      network: net.name,
-      chainId: net.chainId,
-      contracts: {
-        PQCERC20_InfiniteSupply: pqcToken,
-        PQCNFT_PostQuantumERC721: pqcNft,
-        QuantumMultichainBridge: bridge,
-      },
-      faucetUrl: net.faucet,
-      status: 'DEPLOYED_AND_VERIFIED',
-      timestamp: new Date().toISOString(),
-    };
-
-    console.log(`   ✓ Deployed $PQC ERC-20: ${pqcToken}`);
-    console.log(`   ✓ Deployed PQCNFT 721:   ${pqcNft}`);
-    console.log(`   ✓ Deployed QuantumBridge:${bridge}`);
+  const network = await ethers.provider.getNetwork();
+  if (Number(network.chainId) !== expected.chainId) {
+    throw new Error(`Wrong network: expected ${expected.chainId}, got ${network.chainId}`);
   }
 
-  const outPath = path.join(__dirname, '..', 'testnet-deployments.json');
-  fs.writeFileSync(outPath, JSON.stringify(deployments, null, 2));
-  console.log(`\n✅ All 6 Testnets successfully deployed and saved to ${outPath}!`);
+  const [deployer] = await ethers.getSigners();
+  const signerAddress = await deployer.getAddress();
+  console.log(`Deploying SHOR contracts to ${networkName} from ${signerAddress}`);
+
+  const tokenFactory = await ethers.getContractFactory('PQCERC20');
+  const token = await tokenFactory.deploy(1_000_000);
+  await token.waitForDeployment();
+  const tokenAddress = await token.getAddress();
+
+  const nftFactory = await ethers.getContractFactory('PQCNFT');
+  const nft = await nftFactory.deploy();
+  await nft.waitForDeployment();
+  const nftAddress = await nft.getAddress();
+
+  const bridgeFactory = await ethers.getContractFactory('QuantumMultichainBridge');
+  const bridge = await bridgeFactory.deploy(tokenAddress, expected.chainId, signerAddress);
+  await bridge.waitForDeployment();
+  const bridgeAddress = await bridge.getAddress();
+
+  const bridgeTx = await token.setBridgeContract(bridgeAddress);
+  const bridgeReceipt = await bridgeTx.wait();
+
+  const deployment = {
+    network: networkName,
+    chainId: expected.chainId,
+    deployer: signerAddress,
+    contracts: {
+      PQCERC20_InfiniteSupply: tokenAddress,
+      PQCNFT_PostQuantumERC721: nftAddress,
+      QuantumMultichainBridge: bridgeAddress,
+    },
+    transactions: {
+      PQCERC20: token.deploymentTransaction()?.hash,
+      PQCNFT: nft.deploymentTransaction()?.hash,
+      QuantumMultichainBridge: bridge.deploymentTransaction()?.hash,
+      setBridgeContract: bridgeReceipt?.hash,
+    },
+    status: 'DEPLOYED',
+    timestamp: new Date().toISOString(),
+  };
+
+  const outPath = path.join(__dirname, '..', `deployments-${networkName}.json`);
+  fs.writeFileSync(outPath, JSON.stringify(deployment, null, 2) + '\n');
+  console.log(JSON.stringify(deployment, null, 2));
 }
 
-main().catch(console.error);
+async function main() {
+  const networkName = process.env.DEPLOY_NETWORK || process.argv[2];
+  if (!networkName) {
+    throw new Error('Usage: npx hardhat run scripts/deploy-testnet.cjs --network baseSepolia');
+  }
+  await deploy(networkName);
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
