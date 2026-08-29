@@ -14,7 +14,8 @@
     "test:pqc": "node tests/pqc-smoke.mjs",
     "compile:contracts": "hardhat compile",
     "deploy:sepolia": "hardhat run scripts/deploy-testnet.cjs --network sepolia",
-    "deploy:amoy": "hardhat run scripts/deploy-testnet.cjs --network amoy"
+    "deploy:amoy": "hardhat run scripts/deploy-testnet.cjs --network amoy",
+    "deploy:base-sepolia": "hardhat run scripts/deploy-testnet.cjs --network baseSepolia"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
