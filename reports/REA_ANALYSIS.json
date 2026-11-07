@@ -1,0 +1,218 @@
+{
+  "engine": "REA_Reverse_Engineer_Anything",
+  "status": "STRUCTURE_RECONSTRUCTED",
+  "analyzed_files": 70,
+  "manifest": {
+    "bun.lock": {
+      "bytes": 81632
+    },
+    "deployments.json": {
+      "bytes": 3534
+    },
+    "DEPLOYMENT_MULTICHAIN.md": {
+      "bytes": 1925
+    },
+    "DEPLOYMENT_NETLIFY.md": {
+      "bytes": 1231
+    },
+    "DEPLOYMENT_TESTNET.md": {
+      "bytes": 1352
+    },
+    "docker-compose.yml": {
+      "bytes": 252
+    },
+    "Dockerfile": {
+      "bytes": 555
+    },
+    "hardhat.config.cjs": {
+      "bytes": 1811
+    },
+    "index.html": {
+      "bytes": 694
+    },
+    "metadata.json": {
+      "bytes": 366
+    },
+    "netlify.toml": {
+      "bytes": 479
+    },
+    "package-lock.json": {
+      "bytes": 174070
+    },
+    "package.json": {
+      "bytes": 1590
+    },
+    "README.md": {
+      "bytes": 14060
+    },
+    "REALITY_MANIFEST.json": {
+      "bytes": 1436
+    },
+    "render.yaml": {
+      "bytes": 275
+    },
+    "server.ts": {
+      "bytes": 8984
+    },
+    "testnet-deployments.json": {
+      "bytes": 4298
+    },
+    "THE-CREATOR-GOVERNANCE.md": {
+      "bytes": 567
+    },
+    "tsconfig.json": {
+      "bytes": 534
+    },
+    "vite.config.ts": {
+      "bytes": 730
+    },
+    "contracts\\PQCERC20.sol": {
+      "bytes": 4313
+    },
+    "contracts\\PQCNFT.sol": {
+      "bytes": 3698
+    },
+    "contracts\\QuantumMultichainBridge.sol": {
+      "bytes": 4419
+    },
+    "public\\_redirects": {
+      "bytes": 25
+    },
+    "reality\\URS_EVIDENCE_CERTIFICATE.json": {
+      "bytes": 11593
+    },
+    "reality\\URS_EVIDENCE_CERTIFICATE.md": {
+      "bytes": 2400
+    },
+    "reality\\URS_SCORECARD.json": {
+      "bytes": 2445
+    },
+    "scripts\\audit-crypto.mjs": {
+      "bytes": 7196
+    },
+    "scripts\\check-env.mjs": {
+      "bytes": 329
+    },
+    "scripts\\check-truth.mjs": {
+      "bytes": 507
+    },
+    "scripts\\deploy-multichain.cjs": {
+      "bytes": 2099
+    },
+    "scripts\\deploy-testnet.cjs": {
+      "bytes": 2602
+    },
+    "scripts\\generate-urs-certificate.ts": {
+      "bytes": 6348
+    },
+    "scripts\\reality-universal.ts": {
+      "bytes": 15909
+    },
+    "scripts\\rea_inspector.py": {
+      "bytes": 1485
+    },
+    "scripts\\rsi_engine.py": {
+      "bytes": 2039
+    },
+    "src\\App.tsx": {
+      "bytes": 28882
+    },
+    "src\\index.css": {
+      "bytes": 1807
+    },
+    "src\\main.tsx": {
+      "bytes": 350
+    },
+    "src\\types.ts": {
+      "bytes": 5277
+    },
+    "tests\\nist-pqc.test.mjs": {
+      "bytes": 4368
+    },
+    "tests\\reality_check_harness.py": {
+      "bytes": 1250
+    },
+    ".github\\workflows\\ci.yml": {
+      "bytes": 374
+    },
+    ".github\\workflows\\deploy.yml": {
+      "bytes": 1069
+    },
+    ".github\\workflows\\qmoosa-rsi-rea-sync.yml": {
+      "bytes": 531
+    },
+    "src\\components\\AgenticChatbot.tsx": {
+      "bytes": 22731
+    },
+    "src\\components\\AgentInspector.tsx": {
+      "bytes": 7383
+    },
+    "src\\components\\AiTerminal.tsx": {
+      "bytes": 6642
+    },
+    "src\\components\\AnalyticsDashboard.tsx": {
+      "bytes": 5282
+    },
+    "src\\components\\AutoMetaMaskBatchModal.tsx": {
+      "bytes": 11273
+    },
+    "src\\components\\ControlBar.tsx": {
+      "bytes": 7790
+    },
+    "src\\components\\ErrorBoundary.tsx": {
+      "bytes": 2222
+    },
+    "src\\components\\GridAutomaton.tsx": {
+      "bytes": 10210
+    },
+    "src\\components\\InrExchangeHub.tsx": {
+      "bytes": 25271
+    },
+    "src\\components\\MarketingStrategyHub.tsx": {
+      "bytes": 29452
+    },
+    "src\\components\\MultichainBridgeModal.tsx": {
+      "bytes": 12573
+    },
+    "src\\components\\NftMarketplace.tsx": {
+      "bytes": 20533
+    },
+    "src\\components\\PqcHub.tsx": {
+      "bytes": 10084
+    },
+    "src\\components\\QuantumAladdinHub.tsx": {
+      "bytes": 31324
+    },
+    "src\\components\\ShorSyncDashboard.tsx": {
+      "bytes": 15037
+    },
+    "src\\components\\UniversalFaucetModal.tsx": {
+      "bytes": 10359
+    },
+    "src\\components\\Web3WalletBar.tsx": {
+      "bytes": 18092
+    },
+    "src\\components\\WweMetaverseArena.tsx": {
+      "bytes": 24320
+    },
+    "src\\lib\\audioSynth.ts": {
+      "bytes": 4092
+    },
+    "src\\lib\\hqpoEngine.ts": {
+      "bytes": 12154
+    },
+    "src\\lib\\multichain.ts": {
+      "bytes": 13089
+    },
+    "src\\lib\\pqc.ts": {
+      "bytes": 9511
+    },
+    "src\\lib\\syncEngine.ts": {
+      "bytes": 2885
+    },
+    "src\\utils\\pqcCrypto.ts": {
+      "bytes": 32
+    }
+  },
+  "timestamp": 1794037281
+}
