@@ -107,7 +107,7 @@ Respond ONLY with valid JSON.`;
     const rawText = response.text || '{}';
     const cleaned = cleanJsonString(rawText);
     const decision = JSON.parse(cleaned);
-    res.json({ success: true, decision, isRealTimeAi: true });
+    res.json({ success: true, decision, isRealTimeAi: true, pqcStatus: 'not_cryptographically_verified' });
   } catch (error: any) {
     console.warn('Gemini decide error:', error.message);
     res.json({
@@ -117,7 +117,7 @@ Respond ONLY with valid JSON.`;
         statusMessage: 'Quantum lattice equilibrium maintained',
         memoryEntry: 'Local quantum state validated',
         energyAdjustment: 0,
-        pqcAction: 'ML-KEM-768 key re-verification',
+        pqcAction: 'SIMULATION ONLY: no ML-KEM-768 cryptographic verification executed',
       },
       isRealTimeAi: false,
     });

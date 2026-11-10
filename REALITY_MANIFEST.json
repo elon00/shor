@@ -1,0 +1,46 @@
+{
+  "system": "SHOR-NETWORK",
+  "version": "1.0.0",
+  "status": "EVIDENCE_BASED_PQC_PROTOCOL",
+  "description": "Web 4.0 Conway AI Automaton & PQC Network with NIST FIPS 203/204 Pure Lattice Cryptography",
+  "truthTaxonomy": {
+    "cryptographicCore": "PURE_TYPESCRIPT_PQC_EXECUTION",
+    "kemScheme": "NIST_FIPS_203_ML_KEM_768",
+    "signatureScheme": "NIST_FIPS_204_ML_DSA_65",
+    "automatonConsensus": "CONWAY_AI_CELLULAR_AUTOMATON_CONSENSUS",
+    "simulationEliminated": true,
+    "weakestLinkGate": "H=0.60 (Pending external 3rd-party audit)",
+    "auditFirmStatus": "PENDING_EXTERNAL_AUDIT"
+  },
+  "subsystems": [
+    {
+      "name": "PQCCrypto",
+      "path": "src/lib/pqc.ts",
+      "status": "VERIFIED_NIST_FIPS_203_204",
+      "wire": {
+        "kemPublicKeyBytes": 1184,
+        "kemSecretKeyBytes": 2400,
+        "kemCiphertextBytes": 1088,
+        "kemSharedSecretBytes": 32,
+        "dsaPublicKeyBytes": 1952,
+        "dsaSecretKeyBytes": 4032,
+        "dsaSignatureBytes": 3309
+      }
+    },
+    {
+      "name": "HQPOEngine",
+      "path": "src/lib/hqpoEngine.ts",
+      "status": "VERIFIED_PORTFOLIO_OPTIMIZER"
+    },
+    {
+      "name": "SyncEngine",
+      "path": "src/lib/syncEngine.ts",
+      "status": "VERIFIED_STATE_SYNC"
+    },
+    {
+      "name": "MultichainLayer",
+      "path": "src/lib/multichain.ts",
+      "status": "VERIFIED_MULTICHAIN_ROUTING"
+    }
+  ]
+}
