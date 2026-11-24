@@ -6,3 +6,6 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Lean 4 build artifacts
+lean_verify/.lake/
